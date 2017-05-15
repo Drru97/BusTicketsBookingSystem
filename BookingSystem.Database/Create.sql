@@ -1,4 +1,4 @@
-﻿IF db_id('BusTicketsBookingSystemDB') IS NULL
+﻿IF DB_ID('BusTicketsBookingSystemDB') IS NULL
 	BEGIN
 		CREATE DATABASE BusTicketsBookingSystemDB;
 		PRINT 'Database created';

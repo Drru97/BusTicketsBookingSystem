@@ -5,9 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookingSystem.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="BookingSystem" Height="600" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="281,101,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <TabControl HorizontalAlignment="Left" Height="569" VerticalAlignment="Top" Width="792">
+            <TabItem Header="Drivers">
+                <Grid x:Name="ManageDrivers" Background="#FFE5E5E5">
+                    <Grid.DataContext>
+                        TODO: Implement
+                    </Grid.DataContext>
+                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="250">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100px"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="First Name: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"></Label>
+                            <Label Content="Last Name: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"></Label>
+                            <Label Content="Birthdate: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"></Label>
+                            <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
+                            <TextBox Grid.Row="1" Grid.Column="1"></TextBox>
+                            <DatePicker Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
+                            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Add"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Buses">
+                <Grid x:Name="ManageBuses" Background="#FFE5E5E5">
+                    <Grid.DataContext>
+                        TODO: Implement
+                    </Grid.DataContext>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>

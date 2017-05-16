@@ -49,7 +49,7 @@ GO
 
 CREATE TABLE [dbo].[Driver]
 (
-	[ID] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	[Id] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	[FirstName] NVARCHAR(100),
 	[LastName] NVARCHAR(100),
 	[Birthdate] DATE
@@ -58,8 +58,8 @@ GO
 
 CREATE TABLE [dbo].[Bus]
 (
-	[ID] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-	[VIN] NVARCHAR(20),
+	[Id] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	[Vin] NVARCHAR(20),
 	[Model] NVARCHAR(100),
 	[AutomobileNumber] NVARCHAR(10),
 	[PassengersCount] INT
@@ -68,7 +68,7 @@ GO
 
 CREATE TABLE [dbo].[RoutePoint]
 (
-	[ID] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	[Id] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	[Country] NVARCHAR(50),
 	[State] NVARCHAR(50),
 	[Region] NVARCHAR(50),
@@ -78,32 +78,32 @@ GO
 
 CREATE TABLE [dbo].[Route]
 (
-	[ID] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-	[DeparturePointID] INT NOT NULL,
-	[ArrivalPointID] INT NOT NULL,
+	[Id] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	[DeparturePointId] INT NOT NULL,
+	[ArrivalPointId] INT NOT NULL,
 	[Length] FLOAT,
-	CONSTRAINT [FK_DeparturePointID] FOREIGN KEY([DeparturePointID]) REFERENCES [dbo].[RoutePoint]([ID]),
-	CONSTRAINT [FK_ArrivalPointID] FOREIGN KEY([ArrivalPointID]) REFERENCES [dbo].[RoutePoint]([ID])
+	CONSTRAINT [FK_DeparturePointId] FOREIGN KEY([DeparturePointId]) REFERENCES [dbo].[RoutePoint]([Id]),
+	CONSTRAINT [FK_ArrivalPointId] FOREIGN KEY([ArrivalPointId]) REFERENCES [dbo].[RoutePoint]([Id])
 );
 GO
 
 CREATE TABLE [dbo].[Journey]
 (
-	[ID] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-	[RouteID] INT NOT NULL,
-	[BusID] INT NOT NULL,
-	[DriverID] INT NOT NULL,
+	[Id] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	[RouteId] INT NOT NULL,
+	[BusId] INT NOT NULL,
+	[DriverId] INT NOT NULL,
 	[DepartureTime] DATETIME,
 	[ArrivalTime] DATETIME,
-	CONSTRAINT [FK_RouteID] FOREIGN KEY([RouteID]) REFERENCES [dbo].[Route]([ID]),
-	CONSTRAINT [FK_BusID] FOREIGN KEY([BusID]) REFERENCES [dbo].[Bus]([ID]),
-	CONSTRAINT [FK_DriverID] FOREIGN KEY([DriverID]) REFERENCES [dbo].[Driver]([ID])
+	CONSTRAINT [FK_RouteId] FOREIGN KEY([RouteId]) REFERENCES [dbo].[Route]([Id]),
+	CONSTRAINT [FK_BusId] FOREIGN KEY([BusId]) REFERENCES [dbo].[Bus]([Id]),
+	CONSTRAINT [FK_DriverId] FOREIGN KEY([DriverId]) REFERENCES [dbo].[Driver]([Id])
 );
 GO
 
 CREATE TABLE [dbo].[Passenger]
 (
-	[ID] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	[Id] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	[FirstName] NVARCHAR(100),
 	[LastName] NVARCHAR(100)
 );
@@ -111,23 +111,23 @@ GO
 
 CREATE TABLE [dbo].[Ticket]
 (
-	[ID] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-	[JourneyID] INT NOT NULL,
-	[PassengerID] INT NOT NULL,
+	[Id] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	[JourneyId] INT NOT NULL,
+	[PassengerId] INT NOT NULL,
 	[Price] MONEY,
 	[Seat] INT,
 	[PurchaseDateTime] DATETIME NOT NULL DEFAULT(SYSDATETIME()),
-	CONSTRAINT [FK_JourneyID] FOREIGN KEY([JourneyID]) REFERENCES [dbo].[Journey]([ID]),
-	CONSTRAINT [FK_PassengerID] FOREIGN KEY([PassengerID]) REFERENCES [dbo].[Passenger]([ID])
+	CONSTRAINT [FK_JourneyId] FOREIGN KEY([JourneyId]) REFERENCES [dbo].[Journey]([Id]),
+	CONSTRAINT [FK_PassengerId] FOREIGN KEY([PassengerId]) REFERENCES [dbo].[Passenger]([Id])
 );
 GO
 
 CREATE TABLE [dbo].[Traffic]
 (
-	[ID] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-	[JourneyID] INT NOT NULL,
-	[TicketID] INT NOT NULL,
-	CONSTRAINT [FK_JourneyTrafficID] FOREIGN KEY([JourneyID]) REFERENCES [dbo].[Journey]([ID]),
-	CONSTRAINT [FK_TicketID] FOREIGN KEY([TicketID]) REFERENCES [dbo].[Ticket]([ID])
+	[Id] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+	[JourneyId] INT NOT NULL,
+	[TicketId] INT NOT NULL,
+	CONSTRAINT [FK_JourneyTrafficId] FOREIGN KEY([JourneyId]) REFERENCES [dbo].[Journey]([Id]),
+	CONSTRAINT [FK_TicketId] FOREIGN KEY([TicketId]) REFERENCES [dbo].[Ticket]([Id])
 );
 GO

@@ -47,8 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBusRepository.cs" />
     <Compile Include="Abstract\IDriverRepository.cs" />
+    <Compile Include="Abstract\IJourneyRepository.cs" />
+    <Compile Include="Abstract\IPassengerRepository.cs" />
+    <Compile Include="Abstract\IRoutePointRepository.cs" />
+    <Compile Include="Abstract\IRouteRepository.cs" />
+    <Compile Include="Abstract\ITicketRepository.cs" />
+    <Compile Include="Abstract\ITrafficRepository.cs" />
+    <Compile Include="Concrete\BusRepository.cs" />
     <Compile Include="Concrete\DriverRepository.cs" />
+    <Compile Include="Concrete\JourneyRepository.cs" />
+    <Compile Include="Concrete\PassengerRepository.cs" />
+    <Compile Include="Concrete\RoutePointRepository.cs" />
+    <Compile Include="Concrete\RouteRepository.cs" />
+    <Compile Include="Concrete\TicketRepository.cs" />
+    <Compile Include="Concrete\TrafficRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

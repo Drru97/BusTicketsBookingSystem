@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:BookingSystem.UI.ViewModels"
         mc:Ignorable="d"
-        Title="BookingSystem" Height="600" Width="800">
+        Title="BookingSystem" Height="600" Width="800"
+        ResizeMode="NoResize">
 
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="569" VerticalAlignment="Top" Width="792">
@@ -22,7 +23,7 @@
                     <Grid.DataContext>
                         <viewModels:DriverViewModel/>
                     </Grid.DataContext>
-                    <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Drivers}" SelectedItem="{Binding SelectedDriver}" >
+                    <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Drivers}" SelectedItem="{Binding SelectedDriver}" Margin="5" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="5">
@@ -35,15 +36,15 @@
                     </ListBox>
                     <StackPanel Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedDriver}">
                         <Label Content="First Name: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                         <Label Content="Last Name: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                         <Label Content="Birthdate: " VerticalAlignment="Center"/>
-                        <DatePicker Text="{Binding Birthdate, UpdateSourceTrigger=PropertyChanged, StringFormat=dd.MM.yyyy}" VerticalAlignment="Center" FirstDayOfWeek="Monday"/>
+                        <DatePicker Text="{Binding Birthdate, UpdateSourceTrigger=PropertyChanged, StringFormat=dd.MM.yyyy}" VerticalAlignment="Center" FirstDayOfWeek="Monday" Margin="5,0,10,0"/>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-                        <Button Content="+" Width="90" Command="{Binding AddDriverCommand}"/>
-                        <Button Content="-" Width="90" Command="{Binding RemoveDriverCommand}" CommandParameter="{Binding SelectedDriver}"/>
+                        <Button Content="+" Width="90" Command="{Binding AddDriverCommand}" Margin="5,5,5,10" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center"/>
+                        <Button Content="-" Width="90" Command="{Binding RemoveDriverCommand}" CommandParameter="{Binding SelectedDriver}" Margin="5,5,5,10" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" FontSize="48"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -60,7 +61,7 @@
                     <Grid.DataContext>
                         <viewModels:BusViewModel/>
                     </Grid.DataContext>
-                    <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Buses}" SelectedItem="{Binding SelectedBus}" >
+                    <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Buses}" SelectedItem="{Binding SelectedBus}" Margin="5" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="5">
@@ -74,17 +75,17 @@
                     </ListBox>
                     <StackPanel Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedBus}">
                         <Label Content="Model: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                         <Label Content="Automobile number: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding AutomobileNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding AutomobileNumber, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                         <Label Content="VIN: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Vin, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding Vin, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                         <Label Content="Passengers count: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding PassengersCount, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding PassengersCount, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-                        <Button Content="+" Width="90" Command="{Binding AddBusCommand}"/>
-                        <Button Content="-" Width="90" Command="{Binding RemoveBusCommand}" CommandParameter="{Binding SelectedBus}"/>
+                        <Button Content="+" Width="90" Command="{Binding AddBusCommand}" Margin="5,5,5,10" FontSize="48" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button Content="-" Width="90" Command="{Binding RemoveBusCommand}" CommandParameter="{Binding SelectedBus}" Margin="5,5,5,10" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="48" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -101,7 +102,7 @@
                     <Grid.DataContext>
                         <viewModels:RoutePointsViewModel/>
                     </Grid.DataContext>
-                    <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding RoutePoints}" SelectedItem="{Binding SelectedRoutePoint}" >
+                    <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding RoutePoints}" SelectedItem="{Binding SelectedRoutePoint}" Margin="5" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="5">
@@ -115,17 +116,17 @@
                     </ListBox>
                     <StackPanel Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedRoutePoint}">
                         <Label Content="City: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                         <Label Content="State: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding State, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding State, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                         <Label Content="Region: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Region, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding Region, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                         <Label Content="Country: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-                        <Button Content="+" Width="90" Command="{Binding AddRoutePointCommand}"/>
-                        <Button Content="-" Width="90" Command="{Binding RemoveRoutePointCommand}" CommandParameter="{Binding SelectedRoutePoint}"/>
+                        <Button Content="+" Width="90" Command="{Binding AddRoutePointCommand}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
+                        <Button Content="-" Width="90" Command="{Binding RemoveRoutePointCommand}" CommandParameter="{Binding SelectedRoutePoint}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

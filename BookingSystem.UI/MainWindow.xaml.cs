@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using BookingSystem.UI.ViewModels;
 
 namespace BookingSystem.UI
 {
@@ -11,7 +10,6 @@ namespace BookingSystem.UI
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new DriverViewModel();
         }
     }
 }

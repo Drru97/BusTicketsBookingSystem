@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BookingSystem.UI.ViewModels"
+        xmlns:viewModels="clr-namespace:BookingSystem.UI.ViewModels"
         mc:Ignorable="d"
         Title="BookingSystem" Height="600" Width="800">
+    
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="569" VerticalAlignment="Top" Width="792">
             <TabItem Header="Drivers">
@@ -18,6 +19,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="0.2*"></RowDefinition>
                     </Grid.RowDefinitions>
+                    <Grid.DataContext>
+                        <viewModels:DriverViewModel/>
+                    </Grid.DataContext>
                     <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Drivers}" SelectedItem="{Binding SelectedDriver}" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -35,7 +39,7 @@
                         <Label Content="Last Name: " VerticalAlignment="Center"/>
                         <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
                         <Label Content="Birthdate: " VerticalAlignment="Center"/>
-                        <DatePicker VerticalAlignment="Center"/>
+                        <DatePicker Text="{Binding Birthdate, UpdateSourceTrigger=PropertyChanged, StringFormat=dd.MM.yyyy}" VerticalAlignment="Center" FirstDayOfWeek="Monday"/>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                         <Button Content="+" Width="90" Command="{Binding AddDriverCommand}"/>
@@ -45,6 +49,42 @@
             <TabItem Header="Buses">
                 <Grid x:Name="ManageBuses" Background="#FFE5E5E5">
                     <!-- TODO: IMPLEMENT -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.DataContext>
+                        <viewModels:BusViewModel/>
+                    </Grid.DataContext>
+                    <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Buses}" SelectedItem="{Binding SelectedBus}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5">
+                                    <TextBlock FontSize="18" Text="{Binding Path=Model}"></TextBlock>
+                                    <TextBlock Text="{Binding Path=AutomobileNumber}"></TextBlock>
+                                    <TextBlock Text="{Binding Path=Vin}"></TextBlock>
+                                    <TextBlock Text="{Binding Path=PassengersCount}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedBus}">
+                        <Label Content="Model: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Content="Automobile number: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding AutomobileNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Content="VIN: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Vin, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Content="Passengers count: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding PassengersCount, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                        <Button Content="+" Width="90" Command="{Binding AddBusCommand}"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -1,4 +1,11 @@
-﻿IF OBJECT_ID('[dbo].[Traffic]', 'U') IS NOT NULL
+﻿IF DB_ID('BusTicketsBookingSystemDB') IS NULL
+	PRINT 'Database not exist';
+GO
+
+USE BusTicketsBookingSystemDB;
+GO
+
+IF OBJECT_ID('[dbo].[Traffic]', 'U') IS NOT NULL
 	DROP TABLE [dbo].[Traffic];
 GO
 

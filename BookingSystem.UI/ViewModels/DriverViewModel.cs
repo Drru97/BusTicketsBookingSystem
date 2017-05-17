@@ -17,6 +17,7 @@ namespace BookingSystem.UI.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private RelayCommand _addDriverCommand;
+        private RelayCommand _removeDriverCommand;
 
         private string _newDriverFirstName;
         private string _newDriverLastName;
@@ -34,9 +35,27 @@ namespace BookingSystem.UI.ViewModels
                                LastName = _newDriverLastName
                            };
                            Drivers.Insert(0, driver);
-                          _unitOfWork.DriverRepository.AddDriver(driver);
+                           _unitOfWork.DriverRepository.AddDriver(driver);
                            SelectedDriver = driver;
                        }));
+            }
+        }
+
+        public RelayCommand RemoveDriverCommand
+        {
+            get
+            {
+                return _removeDriverCommand ??
+                       (_removeDriverCommand = new RelayCommand(obj =>
+                           {
+                               var driver = obj as Driver;
+                               if (driver != null)
+                               {
+                                   Drivers.Remove(driver);
+                                   _unitOfWork.DriverRepository.RemoveDriver(driver);
+                               }
+                           },
+                           obj => Drivers.Count > 0));
             }
         }
 

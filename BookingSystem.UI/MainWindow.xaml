@@ -6,7 +6,7 @@
         xmlns:viewModels="clr-namespace:BookingSystem.UI.ViewModels"
         mc:Ignorable="d"
         Title="BookingSystem" Height="600" Width="800">
-    
+
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="569" VerticalAlignment="Top" Width="792">
             <TabItem Header="Drivers">
@@ -28,7 +28,7 @@
                                 <StackPanel Margin="5">
                                     <TextBlock FontSize="18" Text="{Binding Path=FirstName}"></TextBlock>
                                     <TextBlock FontSize="18" Text="{Binding Path=LastName}"></TextBlock>
-                                    <TextBlock Text="{Binding Path=Birthdate}"></TextBlock>
+                                    <TextBlock Text="{Binding Path=Birthdate, StringFormat=dd.MM.yyyy}"></TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -43,12 +43,12 @@
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                         <Button Content="+" Width="90" Command="{Binding AddDriverCommand}"/>
+                        <Button Content="-" Width="90" Command="{Binding RemoveDriverCommand}" CommandParameter="{Binding SelectedDriver}"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Buses">
                 <Grid x:Name="ManageBuses" Background="#FFE5E5E5">
-                    <!-- TODO: IMPLEMENT -->
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
@@ -84,6 +84,48 @@
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                         <Button Content="+" Width="90" Command="{Binding AddBusCommand}"/>
+                        <Button Content="-" Width="90" Command="{Binding RemoveBusCommand}" CommandParameter="{Binding SelectedBus}"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Route Points">
+                <Grid x:Name="ManageRoutePoints" Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.DataContext>
+                        <viewModels:RoutePointsViewModel/>
+                    </Grid.DataContext>
+                    <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding RoutePoints}" SelectedItem="{Binding SelectedRoutePoint}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5">
+                                    <TextBlock FontSize="18" Text="{Binding Path=City}"></TextBlock>
+                                    <TextBlock Text="{Binding Path=State}"></TextBlock>
+                                    <TextBlock Text="{Binding Path=Region}"></TextBlock>
+                                    <TextBlock Text="{Binding Path=Country}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedRoutePoint}">
+                        <Label Content="City: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding City, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Content="State: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding State, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Content="Region: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Region, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Content="Country: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Country, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                        <Button Content="+" Width="90" Command="{Binding AddRoutePointCommand}"/>
+                        <Button Content="-" Width="90" Command="{Binding RemoveRoutePointCommand}" CommandParameter="{Binding SelectedRoutePoint}"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

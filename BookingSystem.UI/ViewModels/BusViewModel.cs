@@ -16,6 +16,7 @@ namespace BookingSystem.UI.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private RelayCommand _addBusCommand;
+        private RelayCommand _removeBusCommand;
 
         public RelayCommand AddBusCommand
         {
@@ -29,6 +30,24 @@ namespace BookingSystem.UI.ViewModels
                            _unitOfWork.BusRepository.AddBus(bus);
                            SelectedBus = bus;
                        }));
+            }
+        }
+
+        public RelayCommand RemoveBusCommand
+        {
+            get
+            {
+                return _removeBusCommand ??
+                       (_removeBusCommand = new RelayCommand(obj =>
+                           {
+                               var bus = obj as Bus;
+                               if (bus != null)
+                               {
+                                   Buses.Remove(bus);
+                                   _unitOfWork.BusRepository.RemovBus(bus);
+                               }
+                           },
+                           obj => Buses.Count > 0));
             }
         }
 

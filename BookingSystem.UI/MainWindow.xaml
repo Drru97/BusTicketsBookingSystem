@@ -3,48 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BookingSystem.UI"
+        xmlns:local="clr-namespace:BookingSystem.UI.ViewModels"
         mc:Ignorable="d"
         Title="BookingSystem" Height="600" Width="800">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="569" VerticalAlignment="Top" Width="792">
             <TabItem Header="Drivers">
                 <Grid x:Name="ManageDrivers" Background="#FFE5E5E5">
-                    <Grid.DataContext>
-                        TODO: Implement
-                    </Grid.DataContext>
-                    <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="250">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100px"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Label Content="First Name: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"></Label>
-                            <Label Content="Last Name: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"></Label>
-                            <Label Content="Birthdate: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"></Label>
-                            <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
-                            <TextBox Grid.Row="1" Grid.Column="1"></TextBox>
-                            <DatePicker Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
-                            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Content="Add"/>
-                        </Grid>
-                    </Border>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding Drivers}" SelectedItem="{Binding SelectedDriver}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5">
+                                    <TextBlock FontSize="18" Text="{Binding Path=FirstName}"></TextBlock>
+                                    <TextBlock FontSize="18" Text="{Binding Path=LastName}"></TextBlock>
+                                    <TextBlock Text="{Binding Path=Birthdate}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedDriver}">
+                        <Label Content="First Name: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Content="Last Name: " VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Label Content="Birthdate: " VerticalAlignment="Center"/>
+                        <DatePicker VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+                        <Button Content="+" Width="90" Command="{Binding AddDriverCommand}"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="Buses">
                 <Grid x:Name="ManageBuses" Background="#FFE5E5E5">
-                    <Grid.DataContext>
-                        TODO: Implement
-                    </Grid.DataContext>
+                    <!-- TODO: IMPLEMENT -->
                 </Grid>
-
             </TabItem>
         </TabControl>
-
     </Grid>
 </Window>

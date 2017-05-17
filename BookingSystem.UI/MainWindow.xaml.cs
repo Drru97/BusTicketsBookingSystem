@@ -1,20 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using BookingSystem.DataAccess.Abstract;
-using BookingSystem.DataAccess.Concrete;
-using BookingSystem.Entities;
+﻿using System.Windows;
+using BookingSystem.UI.ViewModels;
 
 namespace BookingSystem.UI
 {
@@ -26,15 +11,7 @@ namespace BookingSystem.UI
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var repo = new DriverRepository(new BookingSystemContext());
-
-            var obj = repo.Drivers.FirstOrDefault();
-
-            MessageBox.Show(obj.FirstName);
+            DataContext = new DriverViewModel();
         }
     }
 }

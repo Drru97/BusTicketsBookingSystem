@@ -33,7 +33,7 @@ namespace BookingSystem.DataAccess.Concrete
                 throw new ArgumentNullException(nameof(driver), "Driver cannot be null");
             }
 
-            var removableDriver = _context.Driver.Find(driver);
+            var removableDriver = _context.Driver.Find(driver.Id);
             if (removableDriver != null)
             {
                 _context.Driver.Remove(removableDriver);

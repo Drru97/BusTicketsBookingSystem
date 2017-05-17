@@ -33,7 +33,7 @@ namespace BookingSystem.DataAccess.Concrete
                 throw new ArgumentNullException(nameof(routePoint), "Route point cannot be null");
             }
 
-            var removableRoutePoint = _context.RoutePoint.Find(routePoint);
+            var removableRoutePoint = _context.RoutePoint.Find(routePoint.Id);
             if (removableRoutePoint != null)
             {
                 _context.RoutePoint.Remove(routePoint);

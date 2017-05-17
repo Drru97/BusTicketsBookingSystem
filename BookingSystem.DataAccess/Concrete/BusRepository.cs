@@ -33,7 +33,7 @@ namespace BookingSystem.DataAccess.Concrete
                 throw new ArgumentNullException(nameof(bus), "Bus cannot be null");
             }
 
-            var removableBus = _context.Bus.Find(bus);
+            var removableBus = _context.Bus.Find(bus.Id);
             if (removableBus != null)
             {
                 _context.Bus.Remove(removableBus);

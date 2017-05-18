@@ -45,7 +45,7 @@ namespace BookingSystem.DataAccess.Concrete
                 throw new ArgumentNullException(nameof(journey), "Journey cannot be null");
             }
 
-            var removableJourney = _context.Journey.Find(journey);
+            var removableJourney = _context.Journey.Find(journey.Id);
             if (removableJourney != null)
             {
                 _context.Journey.Remove(removableJourney);

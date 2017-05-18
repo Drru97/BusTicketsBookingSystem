@@ -70,6 +70,7 @@ namespace BookingSystem.UI.ViewModels
                            {
                                Routes.Remove(route);
                                _unitOfWork.RouteRepository.RemoveRoute(route);
+                               SelectedRoute = Routes.FirstOrDefault();
                            }
                        },
                        obj => Routes.Count > 0));

@@ -50,7 +50,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            
+
             <!-- Buses management tab -->
             <TabItem Header="Buses">
                 <Grid x:Name="ManageBuses" Background="#FFE5E5E5">
@@ -93,7 +93,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            
+
             <!-- Route points management tab -->
             <TabItem Header="Route Points">
                 <Grid x:Name="ManageRoutePoints" Background="#FFE5E5E5">
@@ -136,7 +136,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            
+
             <!-- Routes management tab -->
             <TabItem Header="Routes">
                 <Grid x:Name="ManageRoutes" Background="#FFE5E5E5">
@@ -176,7 +176,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            
+
             <!-- Schedule management tab -->
             <TabItem Header="Schedule">
                 <Grid x:Name="ManageJourneys" Background="#FFE5E5E5">
@@ -195,26 +195,80 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="5">
-                                    <TextBlock FontSize="20"  Text="{Binding Path=Route}"/>
-                                    <TextBlock FontSize="14" Text="{Binding Path=DepartureTime}"/>
-                                    <TextBlock FontSize="14" Text="{Binding Path=ArrivalTime}"/>
-                                    <TextBlock FontSize="14" Text="{Binding Path=Bus.Model}"/>
-                                    <TextBlock FontSize="14" Text="{Binding Path=Driver.LastName}"/>
+                                    <TextBlock FontSize="20">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                <Binding Path="Route.RoutePoint.City"/>
+                                                <Binding Path="Route.RoutePoint1.City"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock xml:space="preserve" FontSize="16" Text="{Binding Path=DepartureTime, StringFormat=dd.MM.yyyy hh:mm}"> departure</TextBlock>
+                                    <TextBlock xml:space="preserve" FontSize="16" Text="{Binding Path=ArrivalTime, StringFormat=dd.MM.yyyy hh:mm}"> arrival</TextBlock>
+                                    <TextBlock FontSize="14">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} ({1}) [{2} passengers]">
+                                                <Binding Path="Bus.Model"></Binding>
+                                                <Binding Path="Bus.AutomobileNumber"/>
+                                                <Binding Path="Bus.PassengersCount"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock FontSize="12">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="Driver.FirstName"/>
+                                                <Binding Path="Driver.LastName"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,0,5,0">
                         <Label Content="Route: " VerticalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding Routes, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedJourney.Route}" Margin="5,0,10,0"/>
+                        <ComboBox ItemsSource="{Binding Routes, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedJourney.Route}" Margin="5,0,10,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding RoutePoint.City}"/>
+                                        <Run xml:space="preserve"> - </Run>
+                                        <Run Text="{Binding RoutePoint1.City}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                         <Label Content="Departure date and time: " VerticalAlignment="Center"/>
-                        <xctk:DateTimePicker Text="{Binding DepartureDateTime, StringFormat=dd.MM.yyyy hh:mm}" Margin="5,0,10,0"/>
+                        <xctk:DateTimePicker Text="{Binding DepartureDateTime, UpdateSourceTrigger=PropertyChanged, StringFormat=dd.MM.yyyy hh:mm}" Value="{Binding SelectedJourney.DepartureTime}" Format="Custom" FormatString="dd.MM.yyyy hh:mm" Margin="5,0,10,0"/>
                         <Label Content="Arrival date and time: " VerticalAlignment="Center"/>
-                        <xctk:DateTimePicker Margin="5,0,10,0"/>
+                        <xctk:DateTimePicker Text="{Binding ArrivalDateTime, UpdateSourceTrigger=PropertyChanged, StringFormat=dd.MM.yyyy hh:mm}" Value="{Binding SelectedJourney.ArrivalTime}" Format="Custom" FormatString="dd.MM.yyyy hh:mm" Margin="5,0,10,0"/>
                         <Label Content="Bus: " VerticalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding Buses, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedJourney.Bus}" Margin="5,0,10,0"/>
+                        <ComboBox ItemsSource="{Binding Buses, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedJourney.Bus}" Margin="5,0,10,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Model}"/>
+                                        <Run xml:space="preserve"> (</Run>
+                                        <Run Text="{Binding AutomobileNumber}"></Run>
+                                        <Run>)[</Run>
+                                        <Run Text="{Binding PassengersCount}"/>
+                                        <Run xml:space="preserve">passengers]</Run>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                         <Label Content="Driver: " VerticalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding Drivers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedJourney.Driver}" Margin="5,0,10,0"/>
+                        <ComboBox ItemsSource="{Binding Drivers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedJourney.Driver}" Margin="5,0,10,0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding FirstName}"/>
+                                        <Run Text="{Binding LastName}"/>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
                         <Button Content="+" Width="90" Command="{Binding AddJourneyCommand}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>

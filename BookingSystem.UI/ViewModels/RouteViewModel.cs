@@ -17,13 +17,31 @@ namespace BookingSystem.UI.ViewModels
         public ObservableCollection<Route> Routes { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private RoutePoint _rp1;
         private RoutePoint _rp2;
 
         private RelayCommand _addRoute;
         private RelayCommand _removeRoute;
 
-        public RoutePoint Rp1 { get; set; }
-        public RoutePoint Rp2 { get; set; }
+        public RoutePoint Rp1
+        {
+            get => _rp1;
+            set
+            {
+                _rp1 = value;
+                OnPropertyChanged(nameof(Rp1));
+            }
+        }
+
+        public RoutePoint Rp2
+        {
+            get => _rp2;
+            set
+            {
+                _rp2 = value;
+                OnPropertyChanged(nameof(Rp2));
+            }
+        }
 
         public RelayCommand AddRouteCommand
         {

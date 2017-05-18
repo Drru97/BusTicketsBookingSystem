@@ -43,7 +43,7 @@ namespace BookingSystem.DataAccess.Concrete
                 throw new ArgumentNullException(nameof(route), "Route cannot be null");
             }
 
-            var removableRoute = _context.Route.Find(route);
+            var removableRoute = _context.Route.Find(route.Id);
             if (removableRoute != null)
             {
                 _context.Route.Remove(removableRoute);

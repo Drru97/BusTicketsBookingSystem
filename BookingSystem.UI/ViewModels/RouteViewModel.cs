@@ -20,8 +20,8 @@ namespace BookingSystem.UI.ViewModels
         private RoutePoint _rp1;
         private RoutePoint _rp2;
 
-        private RelayCommand _addRoute;
-        private RelayCommand _removeRoute;
+        private RelayCommand _addRouteCommand;
+        private RelayCommand _removeRouteCommand;
 
         public RoutePoint Rp1
         {
@@ -47,8 +47,8 @@ namespace BookingSystem.UI.ViewModels
         {
             get
             {
-                return _addRoute ??
-                       (_addRoute = new RelayCommand(obj =>
+                return _addRouteCommand ??
+                       (_addRouteCommand = new RelayCommand(obj =>
                        {
                            var route = new Route();
                            Routes.Insert(0, route);
@@ -62,8 +62,8 @@ namespace BookingSystem.UI.ViewModels
         {
             get
             {
-                return _removeRoute ??
-                       (_removeRoute = new RelayCommand(obj =>
+                return _removeRouteCommand ??
+                       (_removeRouteCommand = new RelayCommand(obj =>
                        {
                            var route = obj as Route;
                            if (route != null)

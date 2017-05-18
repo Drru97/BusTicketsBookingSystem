@@ -27,9 +27,9 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="5">
-                                    <TextBlock FontSize="18" Text="{Binding Path=FirstName}"></TextBlock>
-                                    <TextBlock FontSize="18" Text="{Binding Path=LastName}"></TextBlock>
-                                    <TextBlock Text="{Binding Path=Birthdate, StringFormat=dd.MM.yyyy}"></TextBlock>
+                                    <TextBlock FontSize="20" Text="{Binding Path=FirstName}"/>
+                                    <TextBlock FontSize="20" Text="{Binding Path=LastName}"/>
+                                    <TextBlock FontSize="14" Text="{Binding Path=Birthdate, StringFormat=dd.MM.yyyy}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -65,10 +65,10 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="5">
-                                    <TextBlock FontSize="18" Text="{Binding Path=Model}"></TextBlock>
-                                    <TextBlock Text="{Binding Path=AutomobileNumber}"></TextBlock>
+                                    <TextBlock FontSize="20" Text="{Binding Path=Model}"/>
+                                    <TextBlock Text="{Binding Path=AutomobileNumber}"/>
                                     <TextBlock Text="{Binding Path=Vin}"></TextBlock>
-                                    <TextBlock Text="{Binding Path=PassengersCount}"></TextBlock>
+                                    <TextBlock xml:space="preserve" Text="{Binding Path=PassengersCount}"> passengers</TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -106,10 +106,10 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="5">
-                                    <TextBlock FontSize="18" Text="{Binding Path=City}"></TextBlock>
-                                    <TextBlock Text="{Binding Path=State}"></TextBlock>
-                                    <TextBlock Text="{Binding Path=Region}"></TextBlock>
-                                    <TextBlock Text="{Binding Path=Country}"></TextBlock>
+                                    <TextBlock FontSize="20" Text="{Binding Path=City}"/>
+                                    <TextBlock FontSize="14" Text="{Binding Path=State}"/> 
+                                    <TextBlock FontSize="14" Text="{Binding Path=Region}"/>
+                                    <TextBlock FontSize="14" Text="{Binding Path=Country}"></TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -142,31 +142,30 @@
                         <RowDefinition Height="0.2*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.DataContext>
-                        <viewModels:RoutePointsViewModel/>
+                        <viewModels:RouteViewModel/>
                     </Grid.DataContext>
-                    <ListBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ItemsSource="{Binding RoutePoints}" SelectedItem="{Binding SelectedRoutePoint}" Margin="5,5,5,10" >
+                    <ListBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ItemsSource="{Binding Routes}" SelectedItem="{Binding SelectedRoute}" Margin="5,5,5,10" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="5">
-                                    <TextBlock FontSize="18" Text="{Binding Path=City}"></TextBlock>
-                                    <TextBlock Text="{Binding Path=State}"></TextBlock>
-                                    <TextBlock Text="{Binding Path=Region}"></TextBlock>
-                                    <TextBlock Text="{Binding Path=Country}"></TextBlock>
+                                    <TextBlock FontSize="20"  Text="{Binding Path=RoutePoint.City}"/>
+                                    <TextBlock FontSize="20" Text="{Binding Path=RoutePoint1.City}"/>
+                                    <TextBlock FontSize="14" xml:space="preserve" Text="{Binding Path=Length}"> км</TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <StackPanel Grid.Column="1" Grid.Row="0" DataContext="{Binding SelectedRoutePoint}" Margin="0,0,5,0">
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,0,5,0">
                         <Label Content="Depatrure from: " VerticalAlignment="Center"/>
-                        <ComboBox Margin="5,0,10,0"/>
+                        <ComboBox ItemsSource="{Binding RoutePoints, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Rp1}" DisplayMemberPath="City" Margin="5,0,10,0"/>
                         <Label Content="Arrival into: " VerticalAlignment="Center"/>
-                        <ComboBox Margin="5,0,10,0"/>
+                        <ComboBox ItemsSource="{Binding RoutePoints}" SelectedItem="{Binding Rp2}" DisplayMemberPath="City" Margin="5,0,10,0"/>
                         <Label Content="Length: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Region, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
+                        <TextBox Text="{Binding Length, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-                        <Button Content="+" Width="90" Command="{Binding AddRoutePointCommand}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
-                        <Button Content="-" Width="90" Command="{Binding RemoveRoutePointCommand}" CommandParameter="{Binding SelectedRoutePoint}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
+                        <Button Content="+" Width="90" Command="{Binding AddRouteCommand}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
+                        <Button Content="-" Width="90" Command="{Binding RemoveRouteCommand}" CommandParameter="{Binding SelectedRoute}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

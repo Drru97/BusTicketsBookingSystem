@@ -4,11 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:BookingSystem.UI.ViewModels"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="BookingSystem" Height="600" Width="800"
         ResizeMode="NoResize">
 
     <Grid>
+        <!-- Drivers management tab -->
         <TabControl HorizontalAlignment="Left" Height="569" VerticalAlignment="Top" Width="792">
             <TabItem Header="Drivers">
                 <Grid x:Name="ManageDrivers" Background="#FFE5E5E5">
@@ -48,6 +50,8 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
+            
+            <!-- Buses management tab -->
             <TabItem Header="Buses">
                 <Grid x:Name="ManageBuses" Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -89,6 +93,8 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
+            
+            <!-- Route points management tab -->
             <TabItem Header="Route Points">
                 <Grid x:Name="ManageRoutePoints" Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -107,7 +113,7 @@
                             <DataTemplate>
                                 <StackPanel Margin="5">
                                     <TextBlock FontSize="20" Text="{Binding Path=City}"/>
-                                    <TextBlock FontSize="14" Text="{Binding Path=State}"/> 
+                                    <TextBlock FontSize="14" Text="{Binding Path=State}"/>
                                     <TextBlock FontSize="14" Text="{Binding Path=Region}"/>
                                     <TextBlock FontSize="14" Text="{Binding Path=Country}"></TextBlock>
                                 </StackPanel>
@@ -130,7 +136,8 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <!-- TODO: IMPLEMENT -->
+            
+            <!-- Routes management tab -->
             <TabItem Header="Routes">
                 <Grid x:Name="ManageRoutes" Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -166,6 +173,52 @@
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
                         <Button Content="+" Width="90" Command="{Binding AddRouteCommand}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
                         <Button Content="-" Width="90" Command="{Binding RemoveRouteCommand}" CommandParameter="{Binding SelectedRoute}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            
+            <!-- Schedule management tab -->
+            <TabItem Header="Schedule">
+                <Grid x:Name="ManageJourneys" Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.DataContext>
+                        <viewModels:JourneyViewModel/>
+                    </Grid.DataContext>
+                    <ListBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" ItemsSource="{Binding Journeys}" SelectedItem="{Binding SelectedJourney}" Margin="5,5,5,10" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5">
+                                    <TextBlock FontSize="20"  Text="{Binding Path=Route}"/>
+                                    <TextBlock FontSize="14" Text="{Binding Path=DepartureTime}"/>
+                                    <TextBlock FontSize="14" Text="{Binding Path=ArrivalTime}"/>
+                                    <TextBlock FontSize="14" Text="{Binding Path=Bus.Model}"/>
+                                    <TextBlock FontSize="14" Text="{Binding Path=Driver.LastName}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,0,5,0">
+                        <Label Content="Route: " VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding Routes, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedJourney.Route}" Margin="5,0,10,0"/>
+                        <Label Content="Departure date and time: " VerticalAlignment="Center"/>
+                        <xctk:DateTimePicker Text="{Binding DepartureDateTime, StringFormat=dd.MM.yyyy hh:mm}" Margin="5,0,10,0"/>
+                        <Label Content="Arrival date and time: " VerticalAlignment="Center"/>
+                        <xctk:DateTimePicker Margin="5,0,10,0"/>
+                        <Label Content="Bus: " VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding Buses, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedJourney.Bus}" Margin="5,0,10,0"/>
+                        <Label Content="Driver: " VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding Drivers, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedJourney.Driver}" Margin="5,0,10,0"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                        <Button Content="+" Width="90" Command="{Binding AddJourneyCommand}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
+                        <Button Content="-" Width="90" Command="{Binding RemoveJourneyCommand}" CommandParameter="{Binding SelectedJourney}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

@@ -157,9 +157,9 @@
                     </ListBox>
                     <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,0,5,0">
                         <Label Content="Depatrure from: " VerticalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding RoutePoints, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Rp1}" DisplayMemberPath="City" Margin="5,0,10,0"/>
+                        <ComboBox ItemsSource="{Binding RoutePoints, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedRoute.RoutePoint}" DisplayMemberPath="City" Margin="5,0,10,0"/>
                         <Label Content="Arrival into: " VerticalAlignment="Center"/>
-                        <ComboBox ItemsSource="{Binding RoutePoints}" SelectedItem="{Binding Rp2}" DisplayMemberPath="City" Margin="5,0,10,0"/>
+                        <ComboBox ItemsSource="{Binding RoutePoints}" SelectedItem="{Binding SelectedRoute.RoutePoint1}" DisplayMemberPath="City" Margin="5,0,10,0"/>
                         <Label Content="Length: " VerticalAlignment="Center"/>
                         <TextBox Text="{Binding Length, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                     </StackPanel>

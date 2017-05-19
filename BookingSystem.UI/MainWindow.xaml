@@ -155,8 +155,14 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="5">
-                                    <TextBlock FontSize="20"  Text="{Binding Path=RoutePoint.City}"/>
-                                    <TextBlock FontSize="20" Text="{Binding Path=RoutePoint1.City}"/>
+                                    <TextBlock FontSize="20">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                <Binding Path="RoutePoint.City"/>
+                                                <Binding Path="RoutePoint1.City"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                     <TextBlock FontSize="14" xml:space="preserve" Text="{Binding Path=Length}"> км</TextBlock>
                                 </StackPanel>
                             </DataTemplate>
@@ -168,7 +174,7 @@
                         <Label Content="Arrival into: " VerticalAlignment="Center"/>
                         <ComboBox ItemsSource="{Binding RoutePoints}" SelectedItem="{Binding SelectedRoute.RoutePoint1}" DisplayMemberPath="City" Margin="5,0,10,0"/>
                         <Label Content="Length: " VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Length, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
+                        <TextBox Text="{Binding SelectedRoute.Length, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
                         <Button Content="+" Width="90" Command="{Binding AddRouteCommand}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>

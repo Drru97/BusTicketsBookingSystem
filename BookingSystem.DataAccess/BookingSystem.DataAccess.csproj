@@ -30,7 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,7 +47,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IAdministratorRepository.cs" />
+    <Compile Include="Abstract\IBusRepository.cs" />
+    <Compile Include="Abstract\IDriverRepository.cs" />
+    <Compile Include="Abstract\IJourneyRepository.cs" />
+    <Compile Include="Abstract\IPassengerRepository.cs" />
+    <Compile Include="Abstract\IRoutePointRepository.cs" />
+    <Compile Include="Abstract\IRouteRepository.cs" />
+    <Compile Include="Abstract\ITicketRepository.cs" />
+    <Compile Include="Abstract\ITrafficRepository.cs" />
+    <Compile Include="Abstract\IUnitOfWork.cs" />
+    <Compile Include="Concrete\AdministratorRepository.cs" />
+    <Compile Include="Concrete\BusRepository.cs" />
+    <Compile Include="Concrete\DriverRepository.cs" />
+    <Compile Include="Concrete\JourneyRepository.cs" />
+    <Compile Include="Concrete\PassengerRepository.cs" />
+    <Compile Include="Concrete\RoutePointRepository.cs" />
+    <Compile Include="Concrete\RouteRepository.cs" />
+    <Compile Include="Concrete\TicketRepository.cs" />
+    <Compile Include="Concrete\TrafficRepository.cs" />
+    <Compile Include="Concrete\UnitOfWork.cs" />
+    <Compile Include="Helpers\Hashable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookingSystem.Entities\BookingSystem.Entities.csproj">
+      <Project>{DFF79F73-19A3-4D45-ACE5-E8E1B9E27F86}</Project>
+      <Name>BookingSystem.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

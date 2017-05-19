@@ -2,11 +2,11 @@
 GO
 
 SET IDENTITY_INSERT [dbo].[Driver] ON;
-INSERT INTO [dbo].[Driver] ([Id], [FirstName],[LastName]) VALUES
-	(1, 'Oleg', 'Volyanchuk'), 
-	(2, 'Petro', 'Vasylyshyn'), 
-	(3, 'Ihor', 'Sidorovich'), 
-	(4, 'Stepan', 'Dmytriv');
+INSERT INTO [dbo].[Driver] ([Id], [FirstName],[LastName], [Birthdate]) VALUES
+	(1, 'Oleg', 'Volyanchuk', '1974-08-23'), 
+	(2, 'Petro', 'Vasylyshyn', '1982-11-16'), 
+	(3, 'Ihor', 'Sidorovich', '1969-02-04'), 
+	(4, 'Stepan', 'Dmytriv', '1986-07-05');
 SET IDENTITY_INSERT [dbo].[Driver] OFF;
 GO
 

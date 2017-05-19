@@ -9,5 +9,6 @@ namespace BookingSystem.DataAccess.Abstract
 
         void AddDriver(Driver driver);
         Driver RemoveDriver(Driver driver);
+        Driver UpdateDriver(Driver driver);
     }
 }

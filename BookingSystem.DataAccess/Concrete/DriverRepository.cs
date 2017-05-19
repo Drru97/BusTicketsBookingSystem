@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using BookingSystem.DataAccess.Abstract;
 using BookingSystem.Entities;
 
@@ -41,6 +42,19 @@ namespace BookingSystem.DataAccess.Concrete
             }
 
             return removableDriver;
+        }
+
+        public Driver UpdateDriver(Driver driver)
+        {
+            if (driver == null)
+            {
+                throw new ArgumentNullException(nameof(driver), "Driver cannot be null");
+            }
+
+            _context.Entry(driver).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return driver;
         }
     }
 }

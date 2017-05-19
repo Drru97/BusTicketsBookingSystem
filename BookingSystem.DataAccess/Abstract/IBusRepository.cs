@@ -9,5 +9,6 @@ namespace BookingSystem.DataAccess.Abstract
 
         void AddBus(Bus bus);
         Bus RemovBus(Bus bus);
+        Bus UpdateBus(Bus bus);
     }
 }

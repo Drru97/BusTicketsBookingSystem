@@ -28,12 +28,7 @@ namespace BookingSystem.UI.ViewModels
                 return _addDriverCommand ??
                        (_addDriverCommand = new RelayCommand(obj =>
                        {
-                           var driver = new Driver
-                           {
-                               FirstName = string.Empty,
-                               LastName = string.Empty,
-                               Birthdate = DateTime.Now
-                           };
+                           var driver = new Driver();
                            Drivers.Insert(0, driver);
                            _unitOfWork.DriverRepository.AddDriver(driver);
                            SelectedDriver = driver;
@@ -55,7 +50,7 @@ namespace BookingSystem.UI.ViewModels
                                    _unitOfWork.DriverRepository.RemoveDriver(driver);
                                }
                            },
-                           obj => Drivers.Count > 0));
+                           obj => Drivers.Count > 0 && SelectedDriver != null));
             }
         }
 
@@ -64,7 +59,7 @@ namespace BookingSystem.UI.ViewModels
             get
             {
                 return _editDriverCommand ??
-                       (_editDriverCommand = new RelayCommand(e => Edit(), comm => SelectedDriver != null));
+                       (_editDriverCommand = new RelayCommand(obj => Edit(), obj => SelectedDriver != null));
             }
         }
 
@@ -111,13 +106,6 @@ namespace BookingSystem.UI.ViewModels
         public DriverViewModel()
         {
             Drivers = new ObservableCollection<Driver>(_unitOfWork.DriverRepository.Drivers);
-            Drivers.CollectionChanged += Drivers_CollectionChanged;
-            SelectedDriver = Drivers.FirstOrDefault();
-        }
-
-        private void Drivers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            //  MessageBox.Show("Driver added/removed");
         }
 
         private void Edit()

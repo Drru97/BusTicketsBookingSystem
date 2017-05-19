@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using BookingSystem.DataAccess.Abstract;
 using BookingSystem.Entities;
 
@@ -39,6 +40,19 @@ namespace BookingSystem.DataAccess.Concrete
                 _context.RoutePoint.Remove(routePoint);
                 _context.SaveChanges();
             }
+
+            return routePoint;
+        }
+
+        public RoutePoint UpdateRoutePoint(RoutePoint routePoint)
+        {
+            if (routePoint == null)
+            {
+                throw new ArgumentNullException(nameof(routePoint), "Route point cannot be null");
+            }
+
+            _context.Entry(routePoint).State = EntityState.Modified;
+            _context.SaveChanges();
 
             return routePoint;
         }

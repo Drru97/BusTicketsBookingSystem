@@ -20,6 +20,7 @@ namespace BookingSystem.UI.ViewModels
 
         private RelayCommand _addJourneyCommand;
         private RelayCommand _removeJourneyCommand;
+        private RelayCommand _editJourneyCommand;
 
         public RelayCommand AddJourneyCommand
         {
@@ -51,8 +52,17 @@ namespace BookingSystem.UI.ViewModels
                                    SelectedJourney = Journeys.FirstOrDefault();
                                }
                            },
-                           obj => Journeys.Count > 0
+                           obj => Journeys.Count > 0 && SelectedJourney != null
                        ));
+            }
+        }
+
+        public RelayCommand EditJourneyCommand
+        {
+            get
+            {
+                return _editJourneyCommand ??
+                       (_editJourneyCommand = new RelayCommand(obj => Edit(), obj => SelectedJourney != null));
             }
         }
 
@@ -116,7 +126,11 @@ namespace BookingSystem.UI.ViewModels
         public JourneyViewModel()
         {
             Journeys = new ObservableCollection<Journey>(_unitOfWork.JourneyRepository.Journeys);
-            SelectedJourney = _unitOfWork.JourneyRepository.Journeys.FirstOrDefault();
+        }
+
+        private void Edit()
+        {
+            _unitOfWork.JourneyRepository.UpdateJourney(SelectedJourney);
         }
 
         [NotifyPropertyChangedInvocator]

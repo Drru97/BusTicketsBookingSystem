@@ -9,5 +9,6 @@ namespace BookingSystem.DataAccess.Abstract
 
         void AddRoutePoint(RoutePoint routePoint);
         RoutePoint RemoveRoutePoint(RoutePoint routePoint);
+        RoutePoint UpdateRoutePoint(RoutePoint routePoint);
     }
 }

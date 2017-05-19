@@ -22,6 +22,7 @@ namespace BookingSystem.UI.ViewModels
 
         private RelayCommand _addRouteCommand;
         private RelayCommand _removeRouteCommand;
+        private RelayCommand _editRouteCommand;
 
         public RoutePoint Rp1
         {
@@ -73,7 +74,16 @@ namespace BookingSystem.UI.ViewModels
                                SelectedRoute = Routes.FirstOrDefault();
                            }
                        },
-                       obj => Routes.Count > 0));
+                       obj => Routes.Count > 0 && SelectedRoute != null));
+            }
+        }
+
+        public RelayCommand EditRouteCommand
+        {
+            get
+            {
+                return _editRouteCommand ??
+                       (_editRouteCommand = new RelayCommand(obj => Edit(), obj => SelectedRoute != null));
             }
         }
 
@@ -131,6 +141,11 @@ namespace BookingSystem.UI.ViewModels
         public RouteViewModel()
         {
             Routes = new ObservableCollection<Route>(_unitOfWork.RouteRepository.Routes);
+        }
+
+        private void Edit()
+        {
+            _unitOfWork.RouteRepository.UpdateRoute(SelectedRoute);
         }
 
         [NotifyPropertyChangedInvocator]

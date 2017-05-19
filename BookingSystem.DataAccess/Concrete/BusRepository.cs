@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using BookingSystem.DataAccess.Abstract;
 using BookingSystem.Entities;
 
@@ -41,6 +42,19 @@ namespace BookingSystem.DataAccess.Concrete
             }
 
             return removableBus;
+        }
+
+        public Bus UpdateBus(Bus bus)
+        {
+            if (bus == null)
+            {
+                throw new ArgumentNullException(nameof(bus), "Bus cannot be null");
+            }
+
+            _context.Entry(bus).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return bus;
         }
     }
 }

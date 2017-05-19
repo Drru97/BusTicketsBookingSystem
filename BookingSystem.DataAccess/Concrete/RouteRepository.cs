@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using BookingSystem.DataAccess.Abstract;
 using BookingSystem.Entities;
 
@@ -51,6 +52,19 @@ namespace BookingSystem.DataAccess.Concrete
             }
 
             return removableRoute;
+        }
+
+        public Route UpdateRoute(Route route)
+        {
+            if (route == null)
+            {
+                throw new ArgumentNullException(nameof(route), "Route cannot be null");
+            }
+
+            _context.Entry(route).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return route;
         }
     }
 }

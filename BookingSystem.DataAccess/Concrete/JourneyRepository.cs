@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using BookingSystem.DataAccess.Abstract;
 using BookingSystem.Entities;
 
@@ -53,6 +54,19 @@ namespace BookingSystem.DataAccess.Concrete
             }
 
             return removableJourney;
+        }
+
+        public Journey UpdateJourney(Journey journey)
+        {
+            if (journey == null)
+            {
+                throw new ArgumentNullException(nameof(journey), "Journey cannot be null");
+            }
+
+            _context.Entry(journey).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return journey;
         }
     }
 }

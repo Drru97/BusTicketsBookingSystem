@@ -10,5 +10,6 @@ namespace BookingSystem.DataAccess.Abstract
         void AddRoute(Route route);
         void AddRoute(RoutePoint departurePoint, RoutePoint arrivalPoint, double length);
         Route RemoveRoute(Route route);
+        Route UpdateRoute(Route route);
     }
 }

@@ -17,6 +17,7 @@ namespace BookingSystem.UI.ViewModels
 
         private RelayCommand _addRoutePointCommand;
         private RelayCommand _removeRoutePointRelayCommand;
+        private RelayCommand _editRoutePointCommand;
 
         public RelayCommand AddRoutePointCommand
         {
@@ -47,7 +48,16 @@ namespace BookingSystem.UI.ViewModels
                                    _unitOfWork.RoutePointRepository.RemoveRoutePoint(routePoint);
                                }
                            },
-                           obj => RoutePoints.Count > 0));
+                           obj => RoutePoints.Count > 0 && SelectedRoutePoint != null));
+            }
+        }
+
+        public RelayCommand EditRoutePointCommand
+        {
+            get
+            {
+                return _editRoutePointCommand ??
+                       (_editRoutePointCommand = new RelayCommand(obj => Edit(), obj => SelectedRoutePoint != null));
             }
         }
 
@@ -104,6 +114,11 @@ namespace BookingSystem.UI.ViewModels
         public RoutePointsViewModel()
         {
             RoutePoints = new ObservableCollection<RoutePoint>(_unitOfWork.RoutePointRepository.RoutePoints);
+        }
+
+        private void Edit()
+        {
+            _unitOfWork.RoutePointRepository.UpdateRoutePoint(SelectedRoutePoint);
         }
 
         [NotifyPropertyChangedInvocator]

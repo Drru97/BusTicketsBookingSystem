@@ -46,6 +46,10 @@ IF OBJECT_ID('[dbo].[Passenger]', 'U') IS NOT NULL
 	DROP TABLE [dbo].[Passenger];
 GO
 
+IF OBJECT_ID('[dbo].[Administrator]', 'U') IS NOT NULL
+	DROP TABLE [dbo].[Administrator];
+GO
+
 -- CREATING TABLES
 
 CREATE TABLE [dbo].[Driver]
@@ -130,5 +134,12 @@ CREATE TABLE [dbo].[Traffic]
 	[TicketId] INT NOT NULL,
 	CONSTRAINT [FK_JourneyTrafficId] FOREIGN KEY([JourneyId]) REFERENCES [dbo].[Journey]([Id]),
 	CONSTRAINT [FK_TicketId] FOREIGN KEY([TicketId]) REFERENCES [dbo].[Ticket]([Id])
+);
+GO
+
+CREATE TABLE [dbo].[Administrator]
+(
+	[Username] NVARCHAR(64) NOT NULL PRIMARY KEY,
+	[Password] NVARCHAR(64) NOT NULL
 );
 GO

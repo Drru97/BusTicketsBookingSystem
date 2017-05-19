@@ -46,3 +46,9 @@ INSERT INTO [dbo].[Journey] ([Id], [RouteId], [BusId], [DriverId], [DepartureTim
 	(4, 4, 1, 3, '2017-05-21 10:45', '2017-05-21 12:55');
 SET IDENTITY_INSERT [dbo].[Journey] OFF;
 GO
+
+INSERT INTO [dbo].[Administrator] ([Username], [Password]) VALUES
+	('admin', '7c87541fd3f3ef5016e12d411900c87a6046a8e8'),
+	('administrator', 'ffa50dd8e728e95dac10aba8a0022ecebace52b9'),
+	('test', '87f8ed9157125ffc4da9e06a7b8011ad80a53fe1');
+GO

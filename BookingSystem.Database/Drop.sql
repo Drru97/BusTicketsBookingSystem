@@ -37,3 +37,7 @@ GO
 IF OBJECT_ID('[dbo].[Passenger]', 'U') IS NOT NULL
 	DROP TABLE [dbo].[Passenger];
 GO
+
+IF OBJECT_ID('[dbo].[Administrator]', 'U') IS NOT NULL
+	DROP TABLE [dbo].[Administrator];
+GO

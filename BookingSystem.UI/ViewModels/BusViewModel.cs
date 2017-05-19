@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using BookingSystem.DataAccess.Concrete;
 using BookingSystem.Entities;
@@ -12,6 +13,7 @@ namespace BookingSystem.UI.ViewModels
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         private Bus _selectedBus;
+        private bool HasDependencies => SelectedBus.Journey.Any();
         public ObservableCollection<Bus> Buses { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -48,7 +50,7 @@ namespace BookingSystem.UI.ViewModels
                                    _unitOfWork.BusRepository.RemovBus(bus);
                                }
                            },
-                           obj => Buses.Count > 0 && SelectedBus != null));
+                           obj => Buses.Count > 0 && SelectedBus != null && !HasDependencies));
             }
         }
 

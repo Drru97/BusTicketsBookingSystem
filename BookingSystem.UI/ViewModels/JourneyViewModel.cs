@@ -15,6 +15,7 @@ namespace BookingSystem.UI.ViewModels
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         private Journey _selectedJourney;
+        private bool HasDependencies => SelectedJourney.Ticket.Any();
         public ObservableCollection<Journey> Journeys { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -52,8 +53,7 @@ namespace BookingSystem.UI.ViewModels
                                    SelectedJourney = Journeys.FirstOrDefault();
                                }
                            },
-                           obj => Journeys.Count > 0 && SelectedJourney != null
-                       ));
+                           obj => Journeys.Count > 0 && SelectedJourney != null && !HasDependencies));
             }
         }
 

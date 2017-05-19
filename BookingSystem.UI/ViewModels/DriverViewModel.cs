@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using BookingSystem.DataAccess.Concrete;
 using BookingSystem.Entities;
@@ -13,6 +14,7 @@ namespace BookingSystem.UI.ViewModels
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         private Driver _selectedDriver;
+        private bool HasDependencies => SelectedDriver.Journey.Any();
         public ObservableCollection<Driver> Drivers { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -49,7 +51,7 @@ namespace BookingSystem.UI.ViewModels
                                    _unitOfWork.DriverRepository.RemoveDriver(driver);
                                }
                            },
-                           obj => Drivers.Count > 0 && SelectedDriver != null));
+                           obj => Drivers.Count > 0 && SelectedDriver != null && !HasDependencies));
             }
         }
 

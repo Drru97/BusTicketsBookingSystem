@@ -42,9 +42,10 @@
                         <Label Content="Last Name: " VerticalAlignment="Center"/>
                         <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,10,0"/>
                         <Label Content="Birthdate: " VerticalAlignment="Center"/>
-                        <DatePicker Text="{Binding Birthdate, UpdateSourceTrigger=PropertyChanged, StringFormat=dd.MM.yyyy}" VerticalAlignment="Center" FirstDayOfWeek="Monday" Margin="5,0,10,0"/>
+                        <DatePicker SelectedDate="{Binding Birthdate, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" FirstDayOfWeek="Monday" Margin="5,0,10,0"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                        <Button Content="E" Width="90" Command="{Binding EditDriverCommand}" Margin="5,5,5,10" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center"/>
                         <Button Content="+" Width="90" Command="{Binding AddDriverCommand}" Margin="5,5,5,10" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center"/>
                         <Button Content="-" Width="90" Command="{Binding RemoveDriverCommand}" CommandParameter="{Binding SelectedDriver}" Margin="5,5,5,10" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" FontSize="48"/>
                     </StackPanel>
@@ -246,9 +247,9 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                         <Label Content="Departure date and time: " VerticalAlignment="Center"/>
-                        <xctk:DateTimePicker Text="{Binding DepartureDateTime, UpdateSourceTrigger=PropertyChanged, StringFormat=dd.MM.yyyy hh:mm}" Value="{Binding SelectedJourney.DepartureTime}" Format="Custom" FormatString="dd.MM.yyyy hh:mm" Margin="5,0,10,0"/>
+                        <xctk:DateTimePicker Value="{Binding SelectedJourney.DepartureTime, UpdateSourceTrigger=PropertyChanged}" Format="Custom" FormatString="dd.MM.yyyy hh:mm" Margin="5,0,10,0"/>
                         <Label Content="Arrival date and time: " VerticalAlignment="Center"/>
-                        <xctk:DateTimePicker Text="{Binding ArrivalDateTime, UpdateSourceTrigger=PropertyChanged, StringFormat=dd.MM.yyyy hh:mm}" Value="{Binding SelectedJourney.ArrivalTime}" Format="Custom" FormatString="dd.MM.yyyy hh:mm" Margin="5,0,10,0"/>
+                        <xctk:DateTimePicker Value="{Binding SelectedJourney.ArrivalTime, UpdateSourceTrigger=PropertyChanged}" Format="Custom" FormatString="dd.MM.yyyy hh:mm" Margin="5,0,10,0"/>
                         <Label Content="Bus: " VerticalAlignment="Center"/>
                         <ComboBox ItemsSource="{Binding Buses, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedJourney.Bus}" Margin="5,0,10,0">
                             <ComboBox.ItemTemplate>

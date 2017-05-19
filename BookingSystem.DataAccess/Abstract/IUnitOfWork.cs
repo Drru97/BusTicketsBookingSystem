@@ -10,5 +10,6 @@
         IRouteRepository RouteRepository { get; }
         ITicketRepository TicketRepository { get; }
         ITrafficRepository TrafficRepository { get; }
+        IAdministratorRepository AdministratorRepository { get; }
     }
 }

@@ -14,6 +14,7 @@ namespace BookingSystem.Entities
         public virtual DbSet<RoutePoint> RoutePoint { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<Traffic> Traffic { get; set; }
+        public virtual DbSet<Administrator> Administrators { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

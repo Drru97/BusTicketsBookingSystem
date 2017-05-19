@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IAdministratorRepository.cs" />
     <Compile Include="Abstract\IBusRepository.cs" />
     <Compile Include="Abstract\IDriverRepository.cs" />
     <Compile Include="Abstract\IJourneyRepository.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Abstract\ITicketRepository.cs" />
     <Compile Include="Abstract\ITrafficRepository.cs" />
     <Compile Include="Abstract\IUnitOfWork.cs" />
+    <Compile Include="Concrete\AdministratorRepository.cs" />
     <Compile Include="Concrete\BusRepository.cs" />
     <Compile Include="Concrete\DriverRepository.cs" />
     <Compile Include="Concrete\JourneyRepository.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Concrete\TicketRepository.cs" />
     <Compile Include="Concrete\TrafficRepository.cs" />
     <Compile Include="Concrete\UnitOfWork.cs" />
+    <Compile Include="Helpers\Hashable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

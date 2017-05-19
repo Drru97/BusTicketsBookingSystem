@@ -18,6 +18,7 @@ namespace BookingSystem.DataAccess.Concrete
         private RouteRepository _routeRepository;
         private TicketRepository _ticketRepository;
         private TrafficRepository _trafficRepository;
+        private AdministratorRepository _administratorRepository;
 
         // used by Dispose() to avoid redundant method calls
         private bool _disposed;
@@ -48,6 +49,9 @@ namespace BookingSystem.DataAccess.Concrete
 
         public ITrafficRepository TrafficRepository => _trafficRepository ??
                                                        (_trafficRepository = new TrafficRepository(_context));
+
+        public IAdministratorRepository AdministratorRepository => _administratorRepository ??
+                                                                   (_administratorRepository = new AdministratorRepository(_context));
 
         #endregion
 

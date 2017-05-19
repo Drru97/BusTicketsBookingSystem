@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administrator.cs" />
     <Compile Include="BookingSystemContext.cs" />
     <Compile Include="Bus.cs" />
     <Compile Include="Driver.cs" />

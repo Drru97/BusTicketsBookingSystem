@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using BookingSystem.DataAccess.Concrete;
 using BookingSystem.Entities;
@@ -18,9 +19,7 @@ namespace BookingSystem.UI.ViewModels
 
         private RelayCommand _addDriverCommand;
         private RelayCommand _removeDriverCommand;
-
-        private string _newDriverFirstName;
-        private string _newDriverLastName;
+        private RelayCommand _editDriverCommand;
 
         public RelayCommand AddDriverCommand
         {
@@ -31,8 +30,9 @@ namespace BookingSystem.UI.ViewModels
                        {
                            var driver = new Driver
                            {
-                               FirstName = _newDriverFirstName,
-                               LastName = _newDriverLastName
+                               FirstName = string.Empty,
+                               LastName = string.Empty,
+                               Birthdate = DateTime.Now
                            };
                            Drivers.Insert(0, driver);
                            _unitOfWork.DriverRepository.AddDriver(driver);
@@ -56,6 +56,15 @@ namespace BookingSystem.UI.ViewModels
                                }
                            },
                            obj => Drivers.Count > 0));
+            }
+        }
+
+        public RelayCommand EditDriverCommand
+        {
+            get
+            {
+                return _editDriverCommand ??
+                       (_editDriverCommand = new RelayCommand(e => Edit(), comm => SelectedDriver != null));
             }
         }
 
@@ -102,6 +111,18 @@ namespace BookingSystem.UI.ViewModels
         public DriverViewModel()
         {
             Drivers = new ObservableCollection<Driver>(_unitOfWork.DriverRepository.Drivers);
+            Drivers.CollectionChanged += Drivers_CollectionChanged;
+            SelectedDriver = Drivers.FirstOrDefault();
+        }
+
+        private void Drivers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            //  MessageBox.Show("Driver added/removed");
+        }
+
+        private void Edit()
+        {
+            _unitOfWork.DriverRepository.UpdateDriver(SelectedDriver);
         }
 
         [NotifyPropertyChangedInvocator]

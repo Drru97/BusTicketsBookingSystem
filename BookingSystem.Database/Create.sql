@@ -1,6 +1,7 @@
 ﻿IF DB_ID('BusTicketsBookingSystemDB') IS NULL
 	BEGIN
-		CREATE DATABASE BusTicketsBookingSystemDB;
+		CREATE DATABASE BusTicketsBookingSystemDB
+		COLLATE Cyrillic_General_CI_AS;
 		PRINT 'Database created';
 	END
 ELSE

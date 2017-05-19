@@ -16,7 +16,7 @@ namespace BookingSystem.UI
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LoginClick(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace BookingSystem.UI
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void PassengerClick(object sender, RoutedEventArgs e)
         {
             var userWindow = new UserWindow();
             userWindow.Show();

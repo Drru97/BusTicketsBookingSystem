@@ -30,7 +30,14 @@ namespace BookingSystem.UI.ViewModels
                 return _addJourneyCommand ??
                        (_addJourneyCommand = new RelayCommand(obj =>
                        {
-                           var journey = new Journey();
+                           var journey = new Journey
+                           {
+                               Route = SelectedJourney?.Route ?? _unitOfWork.RouteRepository.Routes.FirstOrDefault(),
+                               Driver = SelectedJourney?.Driver ?? _unitOfWork.DriverRepository.Drivers.FirstOrDefault(),
+                               Bus = SelectedJourney?.Bus ?? _unitOfWork.BusRepository.Buses.FirstOrDefault(),
+                               DepartureTime = SelectedJourney?.DepartureTime ?? DateTime.Now,
+                               ArrivalTime = SelectedJourney?.ArrivalTime ?? DateTime.Now
+                           };
                            Journeys.Insert(0, journey);
                            _unitOfWork.JourneyRepository.AddJourney(journey);
                            SelectedJourney = journey;

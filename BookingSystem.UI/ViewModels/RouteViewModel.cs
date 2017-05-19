@@ -18,32 +18,9 @@ namespace BookingSystem.UI.ViewModels
         public ObservableCollection<Route> Routes { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private RoutePoint _rp1;
-        private RoutePoint _rp2;
-
         private RelayCommand _addRouteCommand;
         private RelayCommand _removeRouteCommand;
         private RelayCommand _editRouteCommand;
-
-        public RoutePoint Rp1
-        {
-            get => _rp1;
-            set
-            {
-                _rp1 = value;
-                OnPropertyChanged(nameof(Rp1));
-            }
-        }
-
-        public RoutePoint Rp2
-        {
-            get => _rp2;
-            set
-            {
-                _rp2 = value;
-                OnPropertyChanged(nameof(Rp2));
-            }
-        }
 
         public RelayCommand AddRouteCommand
         {
@@ -52,7 +29,12 @@ namespace BookingSystem.UI.ViewModels
                 return _addRouteCommand ??
                        (_addRouteCommand = new RelayCommand(obj =>
                        {
-                           var route = new Route();
+                           var route = new Route
+                           {
+                               RoutePoint = SelectedRoute?.RoutePoint ?? _unitOfWork.RoutePointRepository.RoutePoints.FirstOrDefault(),
+                               RoutePoint1 = SelectedRoute?.RoutePoint1 ?? _unitOfWork.RoutePointRepository.RoutePoints.FirstOrDefault(),
+                               Length = default(int)
+                           };
                            Routes.Insert(0, route);
                            _unitOfWork.RouteRepository.AddRoute(route);
                            SelectedRoute = route;
@@ -133,8 +115,6 @@ namespace BookingSystem.UI.ViewModels
             get
             {
                 var routePoints = _unitOfWork.RoutePointRepository.RoutePoints.ToList();
-                Rp1 = routePoints.FirstOrDefault();
-                Rp2 = routePoints.FirstOrDefault();
                 return routePoints;
             }
         }

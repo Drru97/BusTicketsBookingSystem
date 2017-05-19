@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -7,7 +7,6 @@ using BookingSystem.DataAccess.Concrete;
 using BookingSystem.Entities;
 using BookingSystem.UI.Annotations;
 using BookingSystem.UI.Commands;
-using BookingSystem.UI.Helpers;
 
 namespace BookingSystem.UI.ViewModels
 {
@@ -18,21 +17,36 @@ namespace BookingSystem.UI.ViewModels
         public ObservableCollection<Journey> Journeys { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private string _firstName;
+        private string _lastName;
+
         private RelayCommand _bookTicketCommand;
         private RelayCommand _buyTicketCommand;
 
-        //public RelayCommand BookTicketCommand
-        //{
-        //    get
-        //    {
-        //        return _bookTicketCommand ??
-        //               (_bookTicketCommand = new RelayCommand());
-        //    }
-        //}
+        public RelayCommand BookTicketCommand
+        {
+            get
+            {
+                return _bookTicketCommand ??
+                       (_bookTicketCommand = new RelayCommand(obj =>
+                       {
+                           CreateTicket();
+                       },
+                       obj => !PassengerInfoError));
+            }
+        }
 
         public RelayCommand BuyTicketCommand
         {
-            get { return _buyTicketCommand; }
+            get
+            {
+                return _buyTicketCommand ??
+                       (_buyTicketCommand = new RelayCommand(obj =>
+                       {
+                           CreateTicket();
+                       },
+                       obj => !PassengerInfoError));
+            }
         }
 
         public Journey SelectedJourney
@@ -45,21 +59,53 @@ namespace BookingSystem.UI.ViewModels
             }
         }
 
-        public IEnumerable<int> Seats
+        public string FirstName
         {
-            get
+            get => _firstName;
+            set
             {
-                var seats = new List<int>();
-                for (int i = 0; i < 30; i++)
-                    seats.Add(i);
-                return seats;
+                _firstName = value;
+                OnPropertyChanged(nameof(FirstName));
             }
         }
+
+        public string LastName
+        {
+            get => _lastName;
+            set
+            {
+                _lastName = value;
+                OnPropertyChanged(nameof(LastName));
+            }
+        }
+
+        private bool PassengerInfoError => string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName);
 
         public TicketsViewModel()
         {
             Journeys = new ObservableCollection<Journey>(_unitOfWork.JourneyRepository.Journeys);
             SelectedJourney = Journeys.FirstOrDefault();
+        }
+
+        private void CreateTicket()
+        {
+            var passenger = new Passenger
+            {
+                FirstName = FirstName,
+                LastName = LastName
+            };
+
+            var ticket = new Ticket
+            {
+                Journey = SelectedJourney,
+                Passenger = passenger,
+                Price = default(decimal),
+                Seat = default(int),
+                PurchaseDateTime = DateTime.Now
+            };
+
+            _unitOfWork.PassengerRepository.AddPassenger(passenger);
+            _unitOfWork.TicketRepository.AddTicket(ticket);
         }
 
         [NotifyPropertyChangedInvocator]

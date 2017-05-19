@@ -5,6 +5,11 @@ namespace BookingSystem.DataAccess.Helpers
 {
     public static class Hashable
     {
+        /// <summary>
+        /// Provides hashing via SHA1
+        /// </summary>
+        /// <param name="password">Input string to hash</param>
+        /// <returns>SHA1 hash of input string</returns>
         public static string Hash(string password)
         {
             using (var hasher = new SHA1Managed())

@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Policy;
+using System.Threading.Tasks;
 using BookingSystem.DataAccess.Abstract;
 using BookingSystem.Entities;
 
@@ -67,6 +72,17 @@ namespace BookingSystem.DataAccess.Concrete
             _context.SaveChanges();
 
             return journey;
+        }
+
+        public IEnumerable<int> GetAllSeats(Journey journey)
+        {
+            var seats = new List<int>();
+            for (int i = 1; i <= journey.Bus.PassengersCount; i++)
+            {
+                seats.Add(i);
+            }
+
+            return seats;
         }
     }
 }

@@ -293,6 +293,58 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
+
+            <!-- Tickets management tab -->
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Tickets" MouseLeftButtonDown="Tickets_Clicked"></Label>
+                </TabItem.Header>
+                <Grid x:Name="ManageTickets" Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="0.2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.DataContext>
+                        <viewModels:TicketViewModel/>
+                    </Grid.DataContext>
+                    <ListBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding Tickets}" SelectedItem="{Binding SelectedTicket}" Margin="5,5,5,10" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5">
+                                    <TextBlock FontSize="20">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} - {1}">
+                                                <Binding Path="Journey.Route.RoutePoint.City"/>
+                                                <Binding Path="Journey.Route.RoutePoint1.City"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock xml:space="preserve" FontSize="16" Text="{Binding Path=Journey.DepartureTime, StringFormat=dd.MM.yyyy hh:mm}"> departure</TextBlock>
+                                    <TextBlock xml:space="preserve" FontSize="16" Text="{Binding Path=Journey.ArrivalTime, StringFormat=dd.MM.yyyy hh:mm}"> arrival</TextBlock>
+                                    <TextBlock FontSize="14">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="Passenger.FirstName"/>
+                                                <Binding Path="Passenger.LastName"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock xml:space="preserve" FontSize="14" Text="{Binding Path=Seat}"> seat</TextBlock>
+                                    <TextBlock xml:space="preserve" FontSize="14" Text="{Binding Path=Price, StringFormat='{}{0:C}'}"></TextBlock>
+                                    <TextBlock xml:space="preserve" Text="{Binding Path=PurchaseDateTime, StringFormat=dd.MM.yy hh:mm}"> bought</TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                        <Button Content="-" Width="90" Command="{Binding RemoveTicketCommand}" CommandParameter="{Binding SelectedTicket}" FontSize="48" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Margin="5,5,5,10"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

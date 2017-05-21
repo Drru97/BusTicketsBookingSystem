@@ -19,7 +19,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.DataContext>
-                <viewModels:TicketsViewModel/>
+                <viewModels:BookTicketViewModel/>
             </Grid.DataContext>
             <ListBox Grid.Column="0" Grid.RowSpan="2" ItemsSource="{Binding Journeys}" SelectedItem="{Binding SelectedJourney}" Margin="10,10,10,10" >
                 <ListBox.ItemTemplate>
@@ -54,7 +54,7 @@
                 <Label FontSize="16" HorizontalContentAlignment="Center">Last name:</Label>
                 <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" FontSize="20" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="30" HorizontalContentAlignment="Center"/>
                 <Label FontSize="16" HorizontalContentAlignment="Center">Seat:</Label>
-                <ComboBox Height="30"/>
+                <ComboBox FontSize="20" ItemsSource="{Binding Seats, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Center" Height="30"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="1" Margin="10,0,10,10">
                 <Button Command="{Binding BookTicketCommand}" FontSize="30" Height="100" Margin="50, 0, 50, 0">Book</Button>

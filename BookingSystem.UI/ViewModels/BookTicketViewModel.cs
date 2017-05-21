@@ -10,15 +10,20 @@ using BookingSystem.UI.Commands;
 
 namespace BookingSystem.UI.ViewModels
 {
-    public class TicketsViewModel
+    public class BookTicketViewModel
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         private Journey _selectedJourney;
         public ObservableCollection<Journey> Journeys { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
+        private bool PassengerInfoError => string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName);
+
+        public int? SeatsCount => _selectedJourney.Bus.PassengersCount;
 
         private string _firstName;
         private string _lastName;
+        private int _seat;
+        private ObservableCollection<int> _seats;
 
         private RelayCommand _bookTicketCommand;
         private RelayCommand _buyTicketCommand;
@@ -79,9 +84,39 @@ namespace BookingSystem.UI.ViewModels
             }
         }
 
-        private bool PassengerInfoError => string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName);
+        public int Seat
+        {
+            get => _seat;
+            set
+            {
+                _seat = value;
+                OnPropertyChanged(nameof(Seat));
+            }
+        }
 
-        public TicketsViewModel()
+        public ObservableCollection<int> Seats
+        {
+            get => _seats;
+            set
+            {
+                _seats = GetSeats();
+                OnPropertyChanged(nameof(Seats));
+            }
+        }
+
+        public ObservableCollection<int> GetSeats()
+        {
+            _seats = new ObservableCollection<int>();
+
+            for (int i = 1; i <= SelectedJourney.Bus.PassengersCount; i++)
+            {
+                _seats.Add(i);
+            }
+
+            return _seats;
+        }
+
+        public BookTicketViewModel()
         {
             Journeys = new ObservableCollection<Journey>(_unitOfWork.JourneyRepository.Journeys);
             SelectedJourney = Journeys.FirstOrDefault();

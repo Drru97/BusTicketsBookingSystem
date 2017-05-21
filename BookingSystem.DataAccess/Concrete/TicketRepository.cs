@@ -37,5 +37,22 @@ namespace BookingSystem.DataAccess.Concrete
                 Seat = seat
             });
         }
+
+        public Ticket RemoveTicket(Ticket ticket)
+        {
+            if (ticket == null)
+            {
+                throw new ArgumentNullException(nameof(ticket), "Ticket cannot be null");
+            }
+
+            var removableTicket = _context.Ticket.Find(ticket.Id);
+            if (removableTicket != null)
+            {
+                _context.Ticket.Remove(removableTicket);
+                _context.SaveChanges();
+            }
+
+            return removableTicket;
+        }
     }
 }

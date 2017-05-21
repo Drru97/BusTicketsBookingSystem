@@ -97,7 +97,8 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\RoutePointsViewModel.cs" />
     <Compile Include="ViewModels\RouteViewModel.cs" />
-    <Compile Include="ViewModels\TicketsViewModel.cs" />
+    <Compile Include="ViewModels\TicketViewModel.cs" />
+    <Compile Include="ViewModels\BookTicketViewModel.cs" />
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

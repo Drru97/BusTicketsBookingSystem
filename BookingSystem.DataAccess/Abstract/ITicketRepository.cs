@@ -10,5 +10,6 @@ namespace BookingSystem.DataAccess.Abstract
 
         void AddTicket(Ticket ticket);
         void AddTicket(Journey journey, DateTime purchaseDateTime, decimal price, Passenger passenger, int seat);
+        Ticket RemoveTicket(Ticket ticket);
     }
 }

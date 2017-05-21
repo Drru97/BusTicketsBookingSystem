@@ -12,5 +12,6 @@ namespace BookingSystem.DataAccess.Abstract
         void AddJourney(Route route, DateTime departureDateTime, DateTime arrivalDateTime, Bus bus, Driver driver);
         Journey RemoveJourney(Journey journey);
         Journey UpdateJourney(Journey journey);
+        IEnumerable<int> GetAllSeats(Journey journey);
     }
 }

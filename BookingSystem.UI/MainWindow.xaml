@@ -141,7 +141,10 @@
             </TabItem>
 
             <!-- Routes management tab -->
-            <TabItem Header="Routes">
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Routes" MouseLeftButtonDown="Routes_Clicked"></Label>
+                </TabItem.Header>
                 <Grid x:Name="ManageRoutes" Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -188,7 +191,10 @@
             </TabItem>
 
             <!-- Schedule management tab -->
-            <TabItem Header="Schedule">
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Schedule" MouseLeftButtonDown="Schedule_Clicked"></Label>
+                </TabItem.Header>
                 <Grid x:Name="ManageJourneys" Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>

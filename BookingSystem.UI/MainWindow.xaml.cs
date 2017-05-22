@@ -27,5 +27,20 @@ namespace BookingSystem.UI
         {
             ManageTickets.DataContext = new TicketViewModel();
         }
+
+        private void RoutePoints_Clicked(object sender, MouseButtonEventArgs e)
+        {
+            ManageRoutePoints.DataContext = new RoutePointsViewModel();
+        }
+
+        private void Buses_Clicked(object sender, MouseButtonEventArgs e)
+        {
+            ManageBuses.DataContext = new BusViewModel();
+        }
+
+        private void Drivers_Clicked(object sender, MouseButtonEventArgs e)
+        {
+            ManageDrivers.DataContext = new DriverViewModel();
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace BookingSystem.UI.ViewModels
                        {
                            CreateTicket();
                        },
-                       obj => !PassengerInfoError));
+                       obj => !PassengerInfoError && SelectedJourney != null));
             }
         }
 
@@ -57,7 +57,7 @@ namespace BookingSystem.UI.ViewModels
                        {
                            CreateTicket();
                        },
-                       obj => !PassengerInfoError));
+                       obj => !PassengerInfoError && SelectedJourney != null));
             }
         }
 

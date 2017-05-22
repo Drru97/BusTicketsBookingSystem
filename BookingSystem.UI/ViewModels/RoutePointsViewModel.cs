@@ -71,7 +71,7 @@ namespace BookingSystem.UI.ViewModels
 
         public RoutePoint SelectedRoutePoint
         {
-            get => _selectedRoutePoint;
+            get { return _selectedRoutePoint; }
             set
             {
                 _selectedRoutePoint = value;
@@ -81,7 +81,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string Country
         {
-            get => _selectedRoutePoint.Country;
+            get { return _selectedRoutePoint.Country; }
             set
             {
                 _selectedRoutePoint.Country = value;
@@ -91,7 +91,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string State
         {
-            get => _selectedRoutePoint.State;
+            get { return _selectedRoutePoint.State; }
             set
             {
                 _selectedRoutePoint.State = value;
@@ -101,7 +101,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string Region
         {
-            get => _selectedRoutePoint.Region;
+            get { return _selectedRoutePoint.Region; }
             set
             {
                 _selectedRoutePoint.Region = value;
@@ -111,7 +111,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string City
         {
-            get => _selectedRoutePoint.City;
+            get { return _selectedRoutePoint.City; }
             set
             {
                 _selectedRoutePoint.City = value;

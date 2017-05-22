@@ -85,7 +85,7 @@ namespace BookingSystem.UI.ViewModels
 
         public ObservableCollection<Journey> Journeys
         {
-            get => _journeys;
+            get { return _journeys; }
             set
             {
                 _journeys = value;
@@ -95,7 +95,7 @@ namespace BookingSystem.UI.ViewModels
 
         public Journey SelectedJourney
         {
-            get => _selectedJourney;
+            get { return _selectedJourney; }
             set
             {
                 _selectedJourney = value;
@@ -105,7 +105,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string FirstName
         {
-            get => _firstName;
+            get { return _firstName; }
             set
             {
                 _firstName = value;
@@ -115,7 +115,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string LastName
         {
-            get => _lastName;
+            get { return _lastName; }
             set
             {
                 _lastName = value;
@@ -125,7 +125,7 @@ namespace BookingSystem.UI.ViewModels
 
         public RoutePoint DerarturePoint
         {
-            get => _departurePoint;
+            get { return _departurePoint; }
             set
             {
                 _departurePoint = value;
@@ -135,7 +135,7 @@ namespace BookingSystem.UI.ViewModels
 
         public RoutePoint ArrivalPoint
         {
-            get => _arrivalPoint;
+            get { return _arrivalPoint; }
             set
             {
                 _arrivalPoint = value;
@@ -145,7 +145,7 @@ namespace BookingSystem.UI.ViewModels
 
         public DateTime? SelectedDate
         {
-            get => _selectedDate;
+            get { return _selectedDate; }
             set
             {
                 _selectedDate = value;

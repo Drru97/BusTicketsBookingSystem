@@ -61,7 +61,7 @@ namespace BookingSystem.UI.ViewModels
             get
             {
                 return _editBusCommand ??
-                       (_editBusCommand = new RelayCommand(obj => Edit(), obj => SelectedBus != null));
+                       (_editBusCommand = new RelayCommand(obj => Edit(), obj => SelectedBus != null && SelectedBus.PassengersCount > 0));
             }
         }
 
@@ -72,7 +72,7 @@ namespace BookingSystem.UI.ViewModels
 
         public Bus SelectedBus
         {
-            get => _selectedBus;
+            get { return _selectedBus; }
             set
             {
                 _selectedBus = value;
@@ -82,7 +82,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string Model
         {
-            get => _selectedBus.Model;
+            get { return _selectedBus.Model; }
             set
             {
                 _selectedBus.Model = value;
@@ -92,7 +92,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string AutomoblieNumber
         {
-            get => _selectedBus.AutomobileNumber;
+            get { return _selectedBus.AutomobileNumber; }
             set
             {
                 _selectedBus.AutomobileNumber = value;
@@ -102,7 +102,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string Vin
         {
-            get => _selectedBus.Vin;
+            get { return _selectedBus.Vin; }
             set
             {
                 _selectedBus.Vin = value;
@@ -112,7 +112,7 @@ namespace BookingSystem.UI.ViewModels
 
         public int? PassengersCount
         {
-            get => _selectedBus.PassengersCount;
+            get { return _selectedBus.PassengersCount; }
             set
             {
                 _selectedBus.PassengersCount = value;

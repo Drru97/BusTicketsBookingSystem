@@ -43,7 +43,7 @@ namespace BookingSystem.UI.ViewModels
 
         public Ticket SelectedTicket
         {
-            get => _selectedTicket;
+            get { return _selectedTicket; }
             set
             {
                 _selectedTicket = value;

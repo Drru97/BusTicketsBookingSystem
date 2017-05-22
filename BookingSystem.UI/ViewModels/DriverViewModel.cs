@@ -62,7 +62,7 @@ namespace BookingSystem.UI.ViewModels
             get
             {
                 return _editDriverCommand ??
-                       (_editDriverCommand = new RelayCommand(obj => Edit(), obj => SelectedDriver != null));
+                       (_editDriverCommand = new RelayCommand(obj => Edit(), obj => SelectedDriver != null && SelectedDriver.Birthdate < DateTime.Now));
             }
         }
 
@@ -72,7 +72,7 @@ namespace BookingSystem.UI.ViewModels
 
         public Driver SelectedDriver
         {
-            get => _selectedDriver;
+            get { return _selectedDriver; }
             set
             {
                 _selectedDriver = value;
@@ -82,7 +82,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string FirstName
         {
-            get => SelectedDriver.FirstName;
+            get { return SelectedDriver.FirstName; }
             set
             {
                 SelectedDriver.FirstName = value;
@@ -92,7 +92,7 @@ namespace BookingSystem.UI.ViewModels
 
         public string LastName
         {
-            get => SelectedDriver.LastName;
+            get { return SelectedDriver.LastName; }
             set
             {
                 SelectedDriver.LastName = value;
@@ -102,7 +102,7 @@ namespace BookingSystem.UI.ViewModels
 
         public DateTime? Birthdate
         {
-            get => SelectedDriver.Birthdate;
+            get { return SelectedDriver.Birthdate; }
             set
             {
                 SelectedDriver.Birthdate = value;

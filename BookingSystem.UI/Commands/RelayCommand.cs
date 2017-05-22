@@ -9,8 +9,8 @@ namespace BookingSystem.UI.Commands
         private readonly Func<object, bool> _canExecute;
         public event EventHandler CanExecuteChanged
         {
-            add => CommandManager.RequerySuggested += value;
-            remove => CommandManager.RequerySuggested -= value;
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
         }
 
         public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)

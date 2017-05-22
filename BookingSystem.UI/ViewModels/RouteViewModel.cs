@@ -68,7 +68,7 @@ namespace BookingSystem.UI.ViewModels
             get
             {
                 return _editRouteCommand ??
-                       (_editRouteCommand = new RelayCommand(obj => Edit(), obj => SelectedRoute != null));
+                       (_editRouteCommand = new RelayCommand(obj => Edit(), obj => SelectedRoute != null && SelectedRoute.Length > 0));
             }
         }
 
@@ -78,7 +78,7 @@ namespace BookingSystem.UI.ViewModels
 
         public Route SelectedRoute
         {
-            get => _selectedRoute;
+            get { return _selectedRoute; }
             set
             {
                 _selectedRoute = value;
@@ -88,7 +88,7 @@ namespace BookingSystem.UI.ViewModels
 
         public RoutePoint DeparturePoint
         {
-            get => _selectedRoute.RoutePoint;
+            get { return _selectedRoute.RoutePoint; }
             set
             {
                 _selectedRoute.RoutePoint = value;
@@ -98,7 +98,7 @@ namespace BookingSystem.UI.ViewModels
 
         public RoutePoint ArrivalPoint
         {
-            get => _selectedRoute.RoutePoint1;
+            get { return _selectedRoute.RoutePoint1; }
             set
             {
                 _selectedRoute.RoutePoint1 = value;
@@ -108,7 +108,7 @@ namespace BookingSystem.UI.ViewModels
 
         public double? Length
         {
-            get => _selectedRoute?.Length;
+            get { return _selectedRoute?.Length; }
             set
             {
                 _selectedRoute.Length = value;

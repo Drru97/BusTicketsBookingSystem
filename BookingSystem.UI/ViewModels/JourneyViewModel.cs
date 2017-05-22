@@ -81,7 +81,7 @@ namespace BookingSystem.UI.ViewModels
 
         public Journey SelectedJourney
         {
-            get => _selectedJourney;
+            get { return _selectedJourney; }
             set
             {
                 _selectedJourney = value;
@@ -91,7 +91,7 @@ namespace BookingSystem.UI.ViewModels
 
         public DateTime? DepartureDateTime
         {
-            get => SelectedJourney.DepartureTime;
+            get { return SelectedJourney.DepartureTime; }
             set
             {
                 SelectedJourney.DepartureTime = value;
@@ -101,7 +101,7 @@ namespace BookingSystem.UI.ViewModels
 
         public DateTime? ArrivalDateTime
         {
-            get => SelectedJourney.ArrivalTime;
+            get { return SelectedJourney.ArrivalTime; }
             set
             {
                 SelectedJourney.ArrivalTime = value;
@@ -109,32 +109,11 @@ namespace BookingSystem.UI.ViewModels
             }
         }
 
-        public IEnumerable<Route> Routes
-        {
-            get
-            {
-                var routes = _unitOfWork.RouteRepository.Routes.ToList();
-                return routes;
-            }
-        }
+        public IEnumerable<Route> Routes => _unitOfWork.RouteRepository.Routes.ToList();
 
-        public IEnumerable<Bus> Buses
-        {
-            get
-            {
-                var buses = _unitOfWork.BusRepository.Buses.ToList();
-                return buses;
-            }
-        }
+        public IEnumerable<Bus> Buses => _unitOfWork.BusRepository.Buses.ToList();
 
-        public IEnumerable<Driver> Drivers
-        {
-            get
-            {
-                var drivers = _unitOfWork.DriverRepository.Drivers.ToList();
-                return drivers;
-            }
-        }
+        public IEnumerable<Driver> Drivers => _unitOfWork.DriverRepository.Drivers.ToList();
 
         #endregion
 

@@ -110,14 +110,7 @@ namespace BookingSystem.UI.ViewModels
             }
         }
 
-        public IEnumerable<RoutePoint> RoutePoints
-        {
-            get
-            {
-                var routePoints = _unitOfWork.RoutePointRepository.RoutePoints.ToList();
-                return routePoints;
-            }
-        }
+        public IEnumerable<RoutePoint> RoutePoints => _unitOfWork.RoutePointRepository.RoutePoints.ToList();
 
         public RouteViewModel()
         {

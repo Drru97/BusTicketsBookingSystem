@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -10,11 +11,13 @@ using BookingSystem.UI.Commands;
 
 namespace BookingSystem.UI.ViewModels
 {
-    public class BookTicketViewModel
+    public class BookTicketViewModel : INotifyPropertyChanged
     {
         private readonly UnitOfWork _unitOfWork = new UnitOfWork();
         private Journey _selectedJourney;
-        public ObservableCollection<Journey> Journeys { get; set; }
+        private ObservableCollection<Journey> _journeys = new ObservableCollection<Journey>();
+        public IEnumerable<RoutePoint> RoutePoints => _unitOfWork.RoutePointRepository.RoutePoints.ToList();
+
         public event PropertyChangedEventHandler PropertyChanged;
         private bool PassengerInfoError => string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName);
 
@@ -22,11 +25,15 @@ namespace BookingSystem.UI.ViewModels
 
         private string _firstName;
         private string _lastName;
-        private int _seat;
-        private ObservableCollection<int> _seats;
+
+        private RoutePoint _departurePoint;
+        private RoutePoint _arrivalPoint;
+        private DateTime? _selectedDate;
 
         private RelayCommand _bookTicketCommand;
         private RelayCommand _buyTicketCommand;
+        private RelayCommand _filterCommand;
+        private RelayCommand _resetCommand;
 
         public RelayCommand BookTicketCommand
         {
@@ -51,6 +58,34 @@ namespace BookingSystem.UI.ViewModels
                            CreateTicket();
                        },
                        obj => !PassengerInfoError));
+            }
+        }
+
+        public RelayCommand FilterCommand
+        {
+            get
+            {
+                return _filterCommand ??
+                       (_filterCommand = new RelayCommand(obj => Filter(DerarturePoint, ArrivalPoint, SelectedDate)));
+            }
+        }
+
+        public RelayCommand ResetCommand
+        {
+            get
+            {
+                return _resetCommand ??
+                       (_resetCommand = new RelayCommand(obj => Reset()));
+            }
+        }
+
+        public ObservableCollection<Journey> Journeys
+        {
+            get => _journeys;
+            set
+            {
+                _journeys = value;
+                OnPropertyChanged(nameof(Journeys));
             }
         }
 
@@ -84,36 +119,34 @@ namespace BookingSystem.UI.ViewModels
             }
         }
 
-        public int Seat
+        public RoutePoint DerarturePoint
         {
-            get => _seat;
+            get => _departurePoint;
             set
             {
-                _seat = value;
-                OnPropertyChanged(nameof(Seat));
+                _departurePoint = value;
+                OnPropertyChanged(nameof(DerarturePoint));
             }
         }
 
-        public ObservableCollection<int> Seats
+        public RoutePoint ArrivalPoint
         {
-            get => _seats;
+            get => _arrivalPoint;
             set
             {
-                _seats = GetSeats();
-                OnPropertyChanged(nameof(Seats));
+                _arrivalPoint = value;
+                OnPropertyChanged(nameof(ArrivalPoint));
             }
         }
 
-        public ObservableCollection<int> GetSeats()
+        public DateTime? SelectedDate
         {
-            _seats = new ObservableCollection<int>();
-
-            for (int i = 1; i <= SelectedJourney.Bus.PassengersCount; i++)
+            get => _selectedDate;
+            set
             {
-                _seats.Add(i);
+                _selectedDate = value;
+                OnPropertyChanged(nameof(SelectedDate));
             }
-
-            return _seats;
         }
 
         public BookTicketViewModel()
@@ -143,11 +176,60 @@ namespace BookingSystem.UI.ViewModels
             _unitOfWork.TicketRepository.AddTicket(ticket);
         }
 
+        private void Filter(RoutePoint depart, RoutePoint arrival, DateTime? departDateTime)
+        {
+            if (depart != null)
+            {
+                Journeys = new ObservableCollection<Journey>(_unitOfWork
+                    .JourneyRepository
+                    .Journeys
+                    .Where(x => x.Route.RoutePoint == depart));
+            }
+            if (arrival != null)
+            {
+                Journeys = new ObservableCollection<Journey>(_unitOfWork
+                    .JourneyRepository
+                    .Journeys
+                    .Where(x => x.Route.RoutePoint1 == arrival));
+            }
+            if (departDateTime != null)
+            {
+                Journeys = new ObservableCollection<Journey>(_unitOfWork
+                    .JourneyRepository
+                    .Journeys
+                    .Where(x => x?.DepartureTime?.Date == departDateTime.Value.Date));
+            }
+            if (depart != null && arrival != null)
+            {
+                Journeys = new ObservableCollection<Journey>(_unitOfWork
+                    .JourneyRepository
+                    .Journeys
+                    .Where(x => x.Route.RoutePoint == depart)
+                    .Where(x => x.Route.RoutePoint1 == arrival));
+            }
+            if (depart != null && arrival != null && departDateTime != null)
+            {
+                Journeys = new ObservableCollection<Journey>(_unitOfWork
+                    .JourneyRepository
+                    .Journeys
+                    .Where(x => x.Route.RoutePoint == depart)
+                    .Where(x => x.Route.RoutePoint1 == arrival)
+                    .Where(x => x.DepartureTime != null && x.DepartureTime.Value.Date == departDateTime.Value.Date));
+            }
+        }
+
+        private void Reset()
+        {
+            Journeys = new ObservableCollection<Journey>(_unitOfWork.JourneyRepository.Journeys);
+            DerarturePoint = null;
+            ArrivalPoint = null;
+            SelectedDate = null;
+        }
+
         [NotifyPropertyChangedInvocator]
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }

@@ -39,9 +39,16 @@ namespace BookingSystem.UI
 
         private void PassengerClick(object sender, RoutedEventArgs e)
         {
-            var userWindow = new UserWindow();
-            userWindow.Show();
-            Close();
+            try
+            {
+                var userWindow = new UserWindow();
+                userWindow.Show();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

@@ -18,6 +18,8 @@ namespace BookingSystem.UI.ViewModels
         public ObservableCollection<Route> Routes { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region Commands Implementation
+
         private RelayCommand _addRouteCommand;
         private RelayCommand _removeRouteCommand;
         private RelayCommand _editRouteCommand;
@@ -70,6 +72,10 @@ namespace BookingSystem.UI.ViewModels
             }
         }
 
+        #endregion
+
+        #region Properties
+
         public Route SelectedRoute
         {
             get => _selectedRoute;
@@ -111,6 +117,8 @@ namespace BookingSystem.UI.ViewModels
         }
 
         public IEnumerable<RoutePoint> RoutePoints => _unitOfWork.RoutePointRepository.RoutePoints.ToList();
+
+        #endregion
 
         public RouteViewModel()
         {

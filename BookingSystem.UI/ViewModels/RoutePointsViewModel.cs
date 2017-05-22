@@ -17,6 +17,8 @@ namespace BookingSystem.UI.ViewModels
         public ObservableCollection<RoutePoint> RoutePoints { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region Commands Implementation
+
         private RelayCommand _addRoutePointCommand;
         private RelayCommand _removeRoutePointRelayCommand;
         private RelayCommand _editRoutePointCommand;
@@ -62,6 +64,10 @@ namespace BookingSystem.UI.ViewModels
                        (_editRoutePointCommand = new RelayCommand(obj => Edit(), obj => SelectedRoutePoint != null));
             }
         }
+
+        #endregion
+
+        #region Properties
 
         public RoutePoint SelectedRoutePoint
         {
@@ -112,6 +118,8 @@ namespace BookingSystem.UI.ViewModels
                 OnPropertyChanged(nameof(City));
             }
         }
+
+        #endregion
 
         public RoutePointsViewModel()
         {

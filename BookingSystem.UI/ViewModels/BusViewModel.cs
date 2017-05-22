@@ -17,6 +17,8 @@ namespace BookingSystem.UI.ViewModels
         public ObservableCollection<Bus> Buses { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region Commands Implementation
+
         private RelayCommand _addBusCommand;
         private RelayCommand _removeBusCommand;
         private RelayCommand _editBusCommand;
@@ -62,6 +64,11 @@ namespace BookingSystem.UI.ViewModels
                        (_editBusCommand = new RelayCommand(obj => Edit(), obj => SelectedBus != null));
             }
         }
+
+        #endregion
+
+
+        #region Properties
 
         public Bus SelectedBus
         {
@@ -112,6 +119,8 @@ namespace BookingSystem.UI.ViewModels
                 OnPropertyChanged(nameof(PassengersCount));
             }
         }
+
+        #endregion
 
         public BusViewModel()
         {

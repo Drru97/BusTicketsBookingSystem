@@ -31,11 +31,6 @@ namespace BookingSystem.DataAccess.Concrete
             _context.SaveChanges();
         }
 
-        public Administrator RemoveAdministrator(Administrator administrator)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))

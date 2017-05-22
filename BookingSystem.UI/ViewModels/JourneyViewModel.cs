@@ -19,6 +19,8 @@ namespace BookingSystem.UI.ViewModels
         public ObservableCollection<Journey> Journeys { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region Commands Implementation
+
         private RelayCommand _addJourneyCommand;
         private RelayCommand _removeJourneyCommand;
         private RelayCommand _editJourneyCommand;
@@ -72,6 +74,10 @@ namespace BookingSystem.UI.ViewModels
                        (_editJourneyCommand = new RelayCommand(obj => Edit(), obj => SelectedJourney != null));
             }
         }
+
+        #endregion
+
+        #region Properties
 
         public Journey SelectedJourney
         {
@@ -129,6 +135,8 @@ namespace BookingSystem.UI.ViewModels
                 return drivers;
             }
         }
+
+        #endregion
 
         public JourneyViewModel()
         {

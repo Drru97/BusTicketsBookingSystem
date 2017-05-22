@@ -21,14 +21,14 @@ namespace BookingSystem.UI.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private bool PassengerInfoError => string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName);
 
-        public int? SeatsCount => _selectedJourney.Bus.PassengersCount;
-
         private string _firstName;
         private string _lastName;
 
         private RoutePoint _departurePoint;
         private RoutePoint _arrivalPoint;
         private DateTime? _selectedDate;
+
+        #region Commands Implementation
 
         private RelayCommand _bookTicketCommand;
         private RelayCommand _buyTicketCommand;
@@ -78,6 +78,10 @@ namespace BookingSystem.UI.ViewModels
                        (_resetCommand = new RelayCommand(obj => Reset()));
             }
         }
+
+        #endregion
+
+        #region Properties
 
         public ObservableCollection<Journey> Journeys
         {
@@ -149,11 +153,15 @@ namespace BookingSystem.UI.ViewModels
             }
         }
 
+        #endregion
+
         public BookTicketViewModel()
         {
             Journeys = new ObservableCollection<Journey>(_unitOfWork.JourneyRepository.Journeys);
             SelectedJourney = Journeys.FirstOrDefault();
         }
+
+        #region Methods
 
         private void CreateTicket()
         {
@@ -225,6 +233,8 @@ namespace BookingSystem.UI.ViewModels
             ArrivalPoint = null;
             SelectedDate = null;
         }
+
+        #endregion
 
         [NotifyPropertyChangedInvocator]
         public void OnPropertyChanged([CallerMemberName] string propertyName = "")

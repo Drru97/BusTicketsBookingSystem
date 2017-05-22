@@ -18,6 +18,8 @@ namespace BookingSystem.UI.ViewModels
         public ObservableCollection<Driver> Drivers { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region Commands Implementation
+
         private RelayCommand _addDriverCommand;
         private RelayCommand _removeDriverCommand;
         private RelayCommand _editDriverCommand;
@@ -64,6 +66,10 @@ namespace BookingSystem.UI.ViewModels
             }
         }
 
+        #endregion
+
+        #region Properties
+
         public Driver SelectedDriver
         {
             get => _selectedDriver;
@@ -103,6 +109,8 @@ namespace BookingSystem.UI.ViewModels
                 OnPropertyChanged(nameof(Birthdate));
             }
         }
+
+        #endregion
 
         public DriverViewModel()
         {

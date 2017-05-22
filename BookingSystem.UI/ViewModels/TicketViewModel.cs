@@ -16,6 +16,8 @@ namespace BookingSystem.UI.ViewModels
         public ObservableCollection<Ticket> Tickets { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region Commands Implementation
+
         private RelayCommand _removeTicketCommand;
 
         public RelayCommand RemoveTicketCommand
@@ -36,6 +38,8 @@ namespace BookingSystem.UI.ViewModels
                        obj => Tickets.Count > 0 && SelectedTicket != null));
             }
         }
+
+        #endregion
 
         public Ticket SelectedTicket
         {

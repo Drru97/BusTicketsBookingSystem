@@ -12,8 +12,10 @@
     <Grid>
         <!-- Drivers management tab -->
         <TabControl HorizontalAlignment="Left" Height="569" VerticalAlignment="Top" Width="792">
-            <TabItem Header="Drivers">
-                <Grid x:Name="ManageDrivers" Background="#FFE5E5E5">
+            <TabItem.Header>
+                <Label Content="Drivers" MouseLeftButtonDown="Drivers_Clicked"/>
+            </TabItem.Header>
+            <Grid x:Name="ManageDrivers" Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
@@ -53,7 +55,10 @@
             </TabItem>
 
             <!-- Buses management tab -->
-            <TabItem Header="Buses">
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Buses" MouseLeftButtonDown="Buses_Clicked"/>
+                </TabItem.Header>
                 <Grid x:Name="ManageBuses" Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -97,7 +102,10 @@
             </TabItem>
 
             <!-- Route points management tab -->
-            <TabItem Header="Route Points">
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Route points" MouseLeftButtonDown="RoutePoints_Clicked"/>
+                </TabItem.Header>
                 <Grid x:Name="ManageRoutePoints" Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
